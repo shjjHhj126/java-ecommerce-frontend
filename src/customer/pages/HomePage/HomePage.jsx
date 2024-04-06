@@ -13,7 +13,6 @@ const HomePage = () => {
         <HomeSectionCarousel data={men_suits} sectionName={"Dresses"} />
         <HomeSectionCarousel data={men_suits} sectionName={"Shoes"} />
       </div>
-      <Footer />
     </div>
   );
 };

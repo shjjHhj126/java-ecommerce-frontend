@@ -7,127 +7,188 @@ const Footer = () => {
     <div>
       <Grid
         container
-        className="bg-black text-white text-center mt-10"
-        sx={{ bgcolor: "black", color: "white", py: 3 }}>
-        <Grid item xs={12} sm={6} md={3}>
-          <Typography className="pb-5" variant="h6">
-            Company
+        className="bg-black text-white  mt-12"
+        sx={{ bgcolor: "black", color: "white", py: 5 }}>
+        <Grid
+          item
+          container
+          sx={{
+            flex: 1,
+            alignItems: "flex-start",
+            display: "flex",
+            flexDirection: "column",
+          }}>
+          <Typography
+            className="pb-2"
+            sx={{
+              fontWeight: "bold",
+              fontSize: "14px",
+              letterSpacing: "0.05em",
+            }}>
+            CUSTOMER CARE
           </Typography>
-          <div>
-            <Button className="pb-5" variant="h6">
-              About
-            </Button>
-          </div>
-          <div>
-            <Button className="pb-5" variant="h6">
-              Blog
-            </Button>
-          </div>
-          <div>
-            <Button className="pb-5" variant="h6">
-              Press
-            </Button>
-          </div>
-          <div>
-            <Button className="pb-5" variant="h6">
-              Jobs
-            </Button>
-          </div>
-          <div>
-            <Button className="pb-5" variant="h6">
-              Partners
-            </Button>
-          </div>
+
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            Contact US
+          </Button>
+
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            FAQs
+          </Button>
+
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            008-0114-7110
+          </Button>
+
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            Payment Options
+          </Button>
+
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            Track Your Order
+          </Button>
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Typography className="pb-5" variant="h6">
-            Solutions
+        <Grid
+          item
+          container
+          sx={{
+            flex: 1,
+            alignItems: "flex-start",
+            display: "flex",
+            flexDirection: "column",
+          }}>
+          <Typography
+            className="pb-2"
+            sx={{
+              fontWeight: "bold",
+              fontSize: "14px",
+              letterSpacing: "0.05em",
+            }}>
+            &nbsp;
           </Typography>
-          <div>
-            <Button className="pb-5" variant="h6">
-              Marketing
-            </Button>
-          </div>
-          <div>
-            <Button className="pb-5" variant="h6">
-              Anaytics
-            </Button>
-          </div>
-          <div>
-            <Button className="pb-5" variant="h6">
-              Commerce
-            </Button>
-          </div>
-          <div>
-            <Button className="pb-5" variant="h6">
-              Insights
-            </Button>
-          </div>
-          <div>
-            <Button className="pb-5" variant="h6">
-              Supports
-            </Button>
-          </div>
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            Shipping & Delivery
+          </Button>
+
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            Returns & Exchanges
+          </Button>
+
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            Size Guide
+          </Button>
+
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            Gifting REVOLVE
+          </Button>
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Typography className="pb-5" variant="h6">
-            Documentation
+        <Grid
+          item
+          container
+          sx={{
+            flex: 1,
+            alignItems: "flex-start",
+            display: "flex",
+            flexDirection: "column",
+          }}>
+          <Typography
+            className="pb-2"
+            sx={{
+              fontWeight: "bold",
+              fontSize: "14px",
+              letterSpacing: "0.05em",
+            }}>
+            &nbsp;
           </Typography>
-          <div>
-            <Button className="pb-5" variant="h6">
-              Guides
-            </Button>
-          </div>
-          <div>
-            <Button className="pb-5" variant="h6">
-              API Status
-            </Button>
-          </div>
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            Style Experts
+          </Button>
+
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            Why REVOLVE
+          </Button>
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            Feedback
+          </Button>
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            Accessibility
+          </Button>
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Typography className="pb-5" variant="h6">
-            Legals
+        <Grid
+          item
+          container
+          sx={{
+            flex: 1,
+            alignItems: "flex-start",
+            display: "flex",
+            flexDirection: "column",
+          }}>
+          <Typography
+            className="pb-2"
+            sx={{
+              fontWeight: "bold",
+              fontSize: "14px",
+              letterSpacing: "0.05em",
+            }}>
+            INFORMATION
           </Typography>
-          <div>
-            <Button className="pb-5" variant="h6">
-              Claims
-            </Button>
-          </div>
-          <div>
-            <Button className="pb-5" variant="h6">
-              Privacy
-            </Button>
-          </div>
-          <div>
-            <Button className="pb-5" variant="h6">
-              Terms
-            </Button>
-          </div>
+
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            About Us
+          </Button>
+
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            Social Impact
+          </Button>
+
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            Careers
+          </Button>
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            Ambassadors
+          </Button>
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            Affiliate
+          </Button>
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            Investors
+          </Button>
+          <Button className="" sx={{ color: "gray", fontSize: "12px" }}>
+            Press
+          </Button>
         </Grid>
-        <Grid item className="pt-20" xs={12}>
-          <Typography variant="body2" component="p" align="center">
-            &copy; 2024 My Company. All right reserved.
+
+        <Grid
+          item
+          className="pt-5"
+          xs={12}
+          container
+          alignItems="center"
+          justifyContent="space-around"
+          sx={{ borderTop: "1px solid gray" }}>
+          <Typography color="gray" sx={{ fontSize: "12px" }}>
+            2024 &copy; Eminent, Inc. (a Revolve Group company). All Rights
+            Reserved.
           </Typography>
-          <Typography variant="body2" component="p" align="center">
-            Made with love
-            <FavoriteIcon className="text-red-600 text-xs" /> by Me.
-          </Typography>
-          <Typography variant="body2" component="p" align="center">
-            Icons made by{" "}
-            <Link
-              href="https://www.freepik.com"
-              color="inherit"
-              underline="always">
-              Freepik
-            </Link>{" "}
-            from{" "}
-            <Link
-              to="https://www.freepik.com"
-              color="inherit"
-              underline="always">
-              www.flaticon.com
-            </Link>
-          </Typography>
+          <div>
+            <Button sx={{ fontSize: "10px", color: "white" }}>TERMS</Button>
+            <Button sx={{ fontSize: "10px", color: "white" }}> PRIVACY</Button>
+            <Button sx={{ fontSize: "10px", color: "white" }}>
+              COOKIE PREFERENCES
+            </Button>
+            <Button sx={{ fontSize: "10px", color: "white" }}>
+              {" "}
+              CA PRIVACY RIGHTS
+            </Button>
+            <Button sx={{ fontSize: "10px", color: "white" }}>
+              {" "}
+              CA TRANSPARENCY ACT
+            </Button>
+            <Button sx={{ fontSize: "10px", color: "white" }}>
+              {" "}
+              YOUR PRIVACY CHOICES
+            </Button>
+          </div>
         </Grid>
       </Grid>
     </div>

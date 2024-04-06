@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useRef, useEffect } from "react";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -6,7 +6,9 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { Avatar, Button, Menu, MenuItem } from "@mui/material";
+import { Avatar, Button, Menu, MenuItem, IconButton } from "@mui/material";
+import Logout from "@mui/icons-material/Logout";
+import { useNavigate } from "react-router-dom";
 
 const navigation = {
   categories: [
@@ -43,7 +45,6 @@ const navigation = {
             { name: "Sweaters", href: "#" },
             { name: "T-Shirts", href: "#" },
             { name: "Jackets", href: "#" },
-            { name: "Activewear", href: "#" },
             { name: "Browse All", href: "#" },
           ],
         },
@@ -98,12 +99,11 @@ const navigation = {
           id: "clothing",
           name: "Clothing",
           items: [
-            { name: "Tops", href: "#" },
+            { name: "Suits", href: "#" },
             { name: "Pants", href: "#" },
             { name: "Sweaters", href: "#" },
             { name: "T-Shirts", href: "#" },
             { name: "Jackets", href: "#" },
-            { name: "Activewear", href: "#" },
             { name: "Browse All", href: "#" },
           ],
         },
@@ -144,6 +144,22 @@ function classNames(...classes) {
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openAccount = Boolean(anchorEl);
+  const handleClick = (event) => {
+    console.log("hi");
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleCategoryClick = (category, section, item, close) => {
+    navigate(`/${category.id}/${section.id}/${item.name}`);
+    close();
+  };
 
   return (
     <div className="bg-white">
@@ -198,6 +214,7 @@ export default function Navigation() {
                             )
                           }>
                           {category.name}
+                          {/*dont know */}
                         </Tab>
                       ))}
                     </Tab.List>
@@ -206,7 +223,7 @@ export default function Navigation() {
                     {navigation.categories.map((category) => (
                       <Tab.Panel
                         key={category.name}
-                        className="space-y-10 px-4 pb-8 pt-10">
+                        className="space-y-10 px-4 pb-8 pt-10 ">
                         <div className="grid grid-cols-2 gap-x-4">
                           {category.featured.map((item) => (
                             <div
@@ -225,9 +242,10 @@ export default function Navigation() {
                                 <span
                                   className="absolute inset-0 z-10"
                                   aria-hidden="true"
-                                />
+                                />{" "}
                                 {item.name}
                               </a>
+
                               <p aria-hidden="true" className="mt-1">
                                 Shop now
                               </p>
@@ -262,6 +280,7 @@ export default function Navigation() {
                   </Tab.Panels>
                 </Tab.Group>
 
+                {/*pages: Company, Stores */}
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   {navigation.pages.map((page) => (
                     <div key={page.name} className="flow-root">
@@ -316,6 +335,7 @@ export default function Navigation() {
                     className="h-[80px] w-auto"
                     src="https://firebasestorage.googleapis.com/v0/b/java-ecommerce-69ec1.appspot.com/o/Fashion-logo-fashion-clothes-shop-Graphics-26436674-1-1-580x386.png?alt=media&token=3f85db4e-177a-47b9-8deb-8f78abe43662"
                     alt=""
+                    onClick={() => navigate("/")}
                   />
                 </a>
               </div>
@@ -325,7 +345,7 @@ export default function Navigation() {
                 <div className="flex h-full space-x-8">
                   {navigation.categories.map((category) => (
                     <Popover key={category.name} className="flex">
-                      {({ open }) => (
+                      {({ open, close }) => (
                         <>
                           <div className="relative flex">
                             <Popover.Button
@@ -371,6 +391,7 @@ export default function Navigation() {
                                               className="object-cover object-center"
                                             />
                                           </div>
+                                          {/*images */}
                                           <a
                                             href={item.href}
                                             className="mt-6 block font-medium text-gray-900">
@@ -395,6 +416,7 @@ export default function Navigation() {
                                             id={`${section.name}-heading`}
                                             className="font-medium text-gray-900">
                                             {section.name}
+                                            {/*Clothing, Accessories, Brand */}
                                           </p>
                                           <ul
                                             role="list"
@@ -404,11 +426,19 @@ export default function Navigation() {
                                               <li
                                                 key={item.name}
                                                 className="flex">
-                                                <a
-                                                  href={item.href}
-                                                  className="hover:text-gray-800">
+                                                <p
+                                                  onClick={() =>
+                                                    handleCategoryClick(
+                                                      category,
+                                                      section,
+                                                      item,
+                                                      close
+                                                    )
+                                                  }
+                                                  className="hover:text-gray-800 cursor-pointer">
                                                   {item.name}
-                                                </a>
+                                                  {/*Tops, Dresses, Pants */}
+                                                </p>
                                               </li>
                                             ))}
                                           </ul>
@@ -438,11 +468,36 @@ export default function Navigation() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <a
-                    href="#"
-                    className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                    Avatar
-                  </a>
+                  <IconButton
+                    onClick={handleClick}
+                    size="small"
+                    sx={{ ml: 2 }}
+                    aria-controls={open ? "account-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}>
+                    <Avatar sx={{ width: 32, height: 32 }}>U</Avatar>
+                  </IconButton>
+                  <Menu
+                    anchorEl={anchorEl}
+                    id="account-menu"
+                    open={openAccount}
+                    onClose={handleClose}
+                    onClick={handleClose}
+                    transformOrigin={{ horizontal: "right", vertical: "top" }}
+                    anchorOrigin={{ horizontal: "right", vertical: "bottom" }}>
+                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        navigate("/account/order");
+                        handleClose();
+                      }}>
+                      My Orders
+                    </MenuItem>
+                    <MenuItem onClick={handleClose}>
+                      <Logout fontSize="small" />
+                      Logout
+                    </MenuItem>
+                  </Menu>
                 </div>
 
                 {/* Search */}
@@ -457,7 +512,9 @@ export default function Navigation() {
                 </div>
 
                 {/* Cart */}
-                <div className="ml-4 flow-root lg:ml-6">
+                <div
+                  onClick={() => navigate("/cart")}
+                  className="ml-4 flow-root lg:ml-6">
                   <a href="#" className="group -m-2 flex items-center p-2">
                     <ShoppingBagIcon
                       className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
