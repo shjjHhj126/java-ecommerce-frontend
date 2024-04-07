@@ -4,42 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="870d2634-cc62-460d-a40e-ca9b52542bed" name="Changes" comment="rm .idea">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/Application.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/config/AppConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/config/JwtConstant.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/config/JwtProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/config/JwtValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/controller/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/exception/UserException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/model/Address.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/model/Category.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/model/PaymentInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/model/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/model/Rating.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/model/Review.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/model/Size.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/request/LoginRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/response/AuthResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/service/CustomerUserServiceImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/javaecommerce/JavaEcommerceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/javaecommerce/config/SeedData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/javaecommerce/controllers/HomeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/javaecommerce/models/Post.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/javaecommerce/repositories/PostRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/javaecommerce/services/PostService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
-    </list>
+    <list default="true" id="870d2634-cc62-460d-a40e-ca9b52542bed" name="Changes" comment="complete signup, login, logout api" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,7 +59,6 @@
     "Application.debug.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "17",
@@ -159,11 +123,20 @@
       <option name="project" value="LOCAL" />
       <updated>1712398148739</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="complete signup, login, logout api">
+      <option name="closed" value="true" />
+      <created>1712491622629</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1712491622630</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="rm .idea" />
-    <option name="LAST_COMMIT_MESSAGE" value="rm .idea" />
+    <MESSAGE value="complete signup, login, logout api" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete signup, login, logout api" />
   </component>
 </project>
