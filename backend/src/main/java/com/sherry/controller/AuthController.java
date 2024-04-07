@@ -97,6 +97,7 @@ public class AuthController {
         return new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
     }
 
+
     @RequestMapping("/logout")
     public ResponseEntity<String> logoutUserHandler(HttpServletRequest request, HttpServletResponse response) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
