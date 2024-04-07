@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="870d2634-cc62-460d-a40e-ca9b52542bed" name="Changes" comment="complete signup, login, logout api" />
+    <list default="true" id="870d2634-cc62-460d-a40e-ca9b52542bed" name="Changes" comment="complete signup, login, logout api">
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/sherry/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/controller/AuthController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -131,7 +133,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712491622630</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="complete signup, login, logout api">
+      <option name="closed" value="true" />
+      <created>1712491892512</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1712491892512</updated>
+    </task>
+    <task id="LOCAL-00005" summary="complete signup, login, logout api">
+      <option name="closed" value="true" />
+      <created>1712491924001</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1712491924002</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

@@ -103,6 +103,7 @@ public class AuthController {
         if (authentication != null) {
             new SecurityContextLogoutHandler().logout(request, response, authentication);
         }
+
         return new ResponseEntity<>("Logged out successfully", HttpStatus.OK);
     }
 
