@@ -5,6 +5,7 @@ import com.sherry.model.Size;
 import java.util.HashSet;
 import java.util.Set;
 
+// men/clothing/ men_suits
 public class CreateProductRequest {
     private String title;
     private String description;

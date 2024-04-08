@@ -24,6 +24,7 @@ public class Order {
     private LocalDateTime deliveryDate;
 
     @OneToOne
+    @JoinColumn(name = "shipping_addr_id")//?
     private Address shippingAddr;
 
     @Embedded

@@ -83,6 +83,11 @@ public class ProductServiceImplementation implements ProductService{
 
     }
     @Override
+    public List<Product> findAllProducts(){
+        return productRepository.findAll();
+    }
+
+    @Override
     public String deleteProduct(Long productId)throws ProductException{
         Product product = findProductById(productId);
         product.getSizes().clear();
@@ -106,13 +111,13 @@ public class ProductServiceImplementation implements ProductService{
         if(opt.isPresent()){
             return opt.get();
         }
-        throw new ProductException("Product not found with id-"+productId);
+        throw new ProductException("Product not found with id - "+productId);
     };
     @Override
     public List<Product> findProductByCategory(String category){return null;};
 
     @Override
-    public Page<Product> getAllProduct(String category, List<String>colors, List<String>sizes,
+    public Page<Product> getAllProducts(String category, List<String>colors, List<String>sizes,
                                        Integer minPrice, Integer maxPrice, Integer minDiscount,
                                        String sort, String stock, Integer pageNum, Integer pageSize){
 
@@ -141,4 +146,6 @@ public class ProductServiceImplementation implements ProductService{
         return filteredProducts;
 
     };
+
+
 }

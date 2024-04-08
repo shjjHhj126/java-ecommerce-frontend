@@ -22,10 +22,21 @@ public class Cart {
     @Column(name = "total_price")
     private double totalPrice;
 
+    @Column(name = "total_item")
+    private int totalItem;
+
     private int totalDiscountPrice;
 
     private int discount;
     public Cart(){}
+
+    public int getTotalItem() {
+        return totalItem;
+    }
+
+    public void setTotalItem(int totalItem) {
+        this.totalItem = totalItem;
+    }
 
     public void setId(Long id) {
         this.id = id;

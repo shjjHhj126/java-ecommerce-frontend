@@ -1,9 +1,7 @@
 package com.sherry.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class CartItem {
@@ -11,80 +9,86 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name="user_id",nullable = false)
-    private User user;
+    @JsonIgnore
+    @ManyToOne
+    private Cart cart;
 
-    @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL, orphanRemoval = true)
-    @Column(name="cart_items")
-    private Set<CartItem> cartItems=new HashSet<>();
+    @ManyToOne
+    private Product product;
 
-    @Column(name="total_price")
-    private double totalPrice;
+    private String size;
 
-    @Column(name="total_item")
-    private double totalItem;
+    private int quantity;
 
-    private int totalDiscountPrice;
+    private Integer price;
 
-    private int discount;
-public CartItem(){
+    private Integer discountPrice;
 
-}
+    private Long userId;
+
+    public CartItem(){}
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
-    public void setCartItems(Set<CartItem> cartItems) {
-        this.cartItems = cartItems;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setSize(String size) {
+        this.size = size;
     }
 
-    public void setTotalItem(double totalItem) {
-        this.totalItem = totalItem;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public void setTotalDiscountPrice(int totalDiscountPrice) {
-        this.totalDiscountPrice = totalDiscountPrice;
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
-    public void setDiscount(int discount) {
-        this.discount = discount;
+    public void setDiscountPrice(Integer discountPrice) {
+        this.discountPrice = discountPrice;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Long getId() {
         return id;
     }
 
-    public User getUser() {
-        return user;
+    public Cart getCart() {
+        return cart;
     }
 
-    public Set<CartItem> getCartItems() {
-        return cartItems;
+    public Product getProduct() {
+        return product;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    public String getSize() {
+        return size;
     }
 
-    public double getTotalItem() {
-        return totalItem;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public int getTotalDiscountPrice() {
-        return totalDiscountPrice;
+    public Integer getPrice() {
+        return price;
     }
 
-    public int getDiscount() {
-        return discount;
+    public Integer getDiscountPrice() {
+        return discountPrice;
+    }
+
+    public Long getUserId() {
+        return userId;
     }
 }
