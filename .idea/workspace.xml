@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="870d2634-cc62-460d-a40e-ca9b52542bed" name="Changes" comment="x">
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/sherry/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +65,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "17",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/sherr/OneDrive/Desktop/e-commerce/backend/backend",
+    "last_opened_file_path": "C:/Users/sherr/OneDrive/Desktop/spring-boot-e-commerce/backend/pom.xml",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -74,10 +74,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.sherry.service" />
+      <recent name="com.sherry.repository" />
       <recent name="com.sherry.request" />
       <recent name="com.sherry.response" />
       <recent name="com.sherry.model" />
-      <recent name="com.sherry.config" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\sherr\OneDrive\Desktop\e-commerce\backend\backend\.idea" />
