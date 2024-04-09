@@ -9,6 +9,7 @@ import {
 import { Avatar, Button, Menu, MenuItem, IconButton } from "@mui/material";
 import Logout from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
+import AuthModal from "../../Auth/AuthModal";
 
 const navigation = {
   categories: [
@@ -148,10 +149,12 @@ export default function Navigation() {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const openAccount = Boolean(anchorEl);
+  const [openAuthModal, setOpenAuthModal] = useState(false);
+
   const handleClick = (event) => {
-    console.log("hi");
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -159,6 +162,14 @@ export default function Navigation() {
   const handleCategoryClick = (category, section, item, close) => {
     navigate(`/${category.id}/${section.id}/${item.name}`);
     close();
+  };
+
+  const handleCloseAuthModal = () => {
+    setOpenAuthModal(false);
+  };
+
+  const handleOpenAuthModal = () => {
+    setOpenAuthModal(true);
   };
 
   return (
@@ -468,15 +479,27 @@ export default function Navigation() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <IconButton
-                    onClick={handleClick}
-                    size="small"
-                    sx={{ ml: 2 }}
-                    aria-controls={open ? "account-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}>
-                    <Avatar sx={{ width: 32, height: 32 }}>U</Avatar>
-                  </IconButton>
+                  {false ? (
+                    <IconButton
+                      onClick={handleClick}
+                      size="small"
+                      sx={{ ml: 2 }}
+                      aria-controls={open ? "account-menu" : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? "true" : undefined}>
+                      <Avatar sx={{ width: 32, height: 32 }}>U</Avatar>
+                    </IconButton>
+                  ) : (
+                    <Button
+                      style={{
+                        color: "black",
+                        border: "1.5px solid gray",
+                      }}
+                      onClick={handleOpenAuthModal}>
+                      Sign in
+                    </Button>
+                  )}
+
                   <Menu
                     anchorEl={anchorEl}
                     id="account-menu"
@@ -484,7 +507,10 @@ export default function Navigation() {
                     onClose={handleClose}
                     onClick={handleClose}
                     transformOrigin={{ horizontal: "right", vertical: "top" }}
-                    anchorOrigin={{ horizontal: "right", vertical: "bottom" }}>
+                    anchorOrigin={{
+                      horizontal: "right",
+                      vertical: "bottom",
+                    }}>
                     <MenuItem onClick={handleClose}>Profile</MenuItem>
                     <MenuItem
                       onClick={() => {
@@ -531,6 +557,8 @@ export default function Navigation() {
           </div>
         </nav>
       </header>
+
+      <AuthModal handleClose={handleCloseAuthModal} open={openAuthModal} />
     </div>
   );
 }
