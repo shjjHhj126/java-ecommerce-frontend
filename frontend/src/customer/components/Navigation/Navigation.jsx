@@ -8,8 +8,10 @@ import {
 } from "@heroicons/react/24/outline";
 import { Avatar, Button, Menu, MenuItem, IconButton } from "@mui/material";
 import Logout from "@mui/icons-material/Logout";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import AuthModal from "../../Auth/AuthModal";
+import { useDispatch, useSelector } from "react-redux";
+import { signup, getUser, logout } from "../../Auth/Action";
 
 const navigation = {
   categories: [
@@ -146,10 +148,30 @@ function classNames(...classes) {
 export default function Navigation() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const openAccount = Boolean(anchorEl);
   const [openAuthModal, setOpenAuthModal] = useState(false);
+
+  const jwt = localStorage.getItem("jwt");
+  const { auth } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (jwt) {
+      dispatch(getUser(jwt)); //refetch jwt in Action.js
+    }
+  }, [jwt, auth.jwt]);
+
+  useEffect(() => {
+    if (auth.user) {
+      handleClose(); //close menu
+    }
+    if (location.pathname == "/login" || location.pathname == "/signup") {
+      navigate(-1);
+    }
+  }, [auth.user]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -166,10 +188,16 @@ export default function Navigation() {
 
   const handleCloseAuthModal = () => {
     setOpenAuthModal(false);
+    navigate("/");
   };
 
   const handleOpenAuthModal = () => {
     setOpenAuthModal(true);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    handleClose();
   };
 
   return (
@@ -479,7 +507,7 @@ export default function Navigation() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  {false ? (
+                  {auth.user?.firstName ? (
                     <IconButton
                       onClick={handleClick}
                       size="small"
@@ -487,7 +515,9 @@ export default function Navigation() {
                       aria-controls={open ? "account-menu" : undefined}
                       aria-haspopup="true"
                       aria-expanded={open ? "true" : undefined}>
-                      <Avatar sx={{ width: 32, height: 32 }}>U</Avatar>
+                      <Avatar sx={{ width: 32, height: 32 }}>
+                        <p className="text-xs">{auth.user?.firstName}</p>
+                      </Avatar>
                     </IconButton>
                   ) : (
                     <Button
@@ -496,7 +526,7 @@ export default function Navigation() {
                         border: "1.5px solid gray",
                       }}
                       onClick={handleOpenAuthModal}>
-                      Sign in
+                      Log in
                     </Button>
                   )}
 
@@ -519,7 +549,7 @@ export default function Navigation() {
                       }}>
                       My Orders
                     </MenuItem>
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onClick={handleLogout}>
                       <Logout fontSize="small" />
                       Logout
                     </MenuItem>
