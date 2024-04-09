@@ -21,6 +21,7 @@ com\sherry\service\ProductServiceImplementation.class
 com\sherry\response\ApiResponse.class
 com\sherry\model\Category.class
 com\sherry\model\Rating.class
+com\sherry\repository\OrderItemRepository.class
 com\sherry\config\JwtProvider.class
 com\sherry\controller\CartItemController.class
 com\sherry\request\LoginRequest.class
@@ -28,6 +29,7 @@ com\sherry\model\Address.class
 com\sherry\model\CartItem.class
 com\sherry\controller\RatingController.class
 com\sherry\model\Product.class
+com\sherry\service\OrderItemServiceImplementation.class
 com\sherry\service\RatingServiceImplementation.class
 com\sherry\controller\AuthController.class
 com\sherry\service\UserService.class
@@ -38,6 +40,7 @@ com\sherry\model\Cart.class
 com\sherry\model\PaymentInfo.class
 com\sherry\service\CartItemService.class
 com\sherry\controller\UserProductController.class
+com\sherry\repository\AddressRepository.class
 com\sherry\controller\PaymentController.class
 com\sherry\controller\ReviewController.class
 com\sherry\request\AddItemRequest.class
@@ -59,6 +62,7 @@ com\sherry\repository\ProductRepository.class
 com\sherry\model\Size.class
 com\sherry\service\CustomerUserServiceImplementation.class
 com\sherry\controller\OrderController.class
+com\sherry\service\OrderItemService.class
 com\sherry\model\PaymentDetails.class
 com\sherry\repository\RatingRepository.class
 com\sherry\config\JwtValidator.class

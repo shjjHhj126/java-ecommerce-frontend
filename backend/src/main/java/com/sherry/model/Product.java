@@ -14,19 +14,16 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-//    @Column(name="title")
     private String title;
 
-//    @Column(name="description")
     private String description;
 
-//    @Column(name="price")
     private int price;
 
     @Column(name="discount_price")
     private int discountPrice;
 
-    @Column(name="discountPercent")
+    @Column(name="discount_percent")
     private int discountPercent;
 
     @Column(name="quantity")
@@ -168,7 +165,7 @@ public class Product {
         this.discountPrice = discountPrice;
     }
 
-    public void setDiscountPercent(int discount_percent) {
+    public void setDiscountPercent(int discountPercent) {
         this.discountPercent = discountPercent;
     }
 

@@ -15,6 +15,9 @@ public class OrderItem {
     @ManyToOne
     private Order order;
 
+    @ManyToOne
+    private Product product;
+
     private String size;
     private int quantity;
     private Integer price;
@@ -26,15 +29,24 @@ public class OrderItem {
 
     }
 
-    public OrderItem(Long id, Order order, String size, int quantity, Integer price, Integer discountPrice, Long userId, LocalDateTime deliveryDate) {
+    public OrderItem(Long id, Order order, Product product, String size, int quantity, Integer price, Integer discountPrice, Long userId, LocalDateTime deliveryDate) {
         this.id = id;
         this.order = order;
+        this.product = product;
         this.size = size;
         this.quantity = quantity;
         this.price = price;
         this.discountPrice = discountPrice;
         this.userId = userId;
         this.deliveryDate = deliveryDate;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Product getProduct() {
+        return product;
     }
 
     public void setId(Long id) {

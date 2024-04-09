@@ -2,10 +2,12 @@ package com.sherry.controller;
 
 import com.sherry.config.JwtProvider;
 import com.sherry.exception.UserException;
+import com.sherry.model.Cart;
 import com.sherry.model.User;
 import com.sherry.repository.UserRepository;
 import com.sherry.request.LoginRequest;
 import com.sherry.response.AuthResponse;
+import com.sherry.service.CartService;
 import com.sherry.service.CustomerUserServiceImplementation;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,11 +34,14 @@ public class AuthController {
 
     private CustomerUserServiceImplementation customerUserService;
 
-    public AuthController(UserRepository userRepository, CustomerUserServiceImplementation customerUserService, PasswordEncoder passwordEncoder, JwtProvider jwtProvider){
+    private CartService cartService;
+
+    public AuthController(UserRepository userRepository, CustomerUserServiceImplementation customerUserService, PasswordEncoder passwordEncoder, JwtProvider jwtProvider, CartService cartService){
         this.userRepository = userRepository;
         this.customerUserService = customerUserService;
         this.passwordEncoder = passwordEncoder;
         this.jwtProvider = jwtProvider;
+        this.cartService = cartService;
     }
     @RequestMapping("/signup")
     public ResponseEntity<AuthResponse>createUserHandler(@RequestBody User user)throws UserException{
@@ -59,6 +64,7 @@ public class AuthController {
         newUser.setLastName(lastName);
 
         User savedUser = userRepository.save(newUser);
+        Cart cart = cartService.createCart(savedUser);
 
 //        System.out.println("Received signup request for savedUser: " + savedUser);
 

@@ -1,2 +1,16 @@
-package com.sherry.service;public class OrderItemServiceImplementation {
+package com.sherry.service;
+
+import com.sherry.model.OrderItem;
+import com.sherry.repository.OrderItemRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class OrderItemServiceImplementation implements OrderItemService {
+    @Autowired
+    private OrderItemRepository orderItemRepository;
+    @Override
+    public OrderItem createOrderItem(OrderItem orderItem) {
+        return orderItemRepository.save(orderItem);
+    }
 }

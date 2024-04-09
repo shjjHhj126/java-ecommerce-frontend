@@ -14,7 +14,7 @@ public class Category {
     @Size(max=50)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)//AHHHHHHHHH
     @JoinColumn(name="parent_category_id")
     private Category parentCategory;
 

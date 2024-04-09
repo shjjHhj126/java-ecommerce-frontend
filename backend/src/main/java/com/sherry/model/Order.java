@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name="theOrder")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,7 +25,6 @@ public class Order {
     private LocalDateTime deliveryDate;
 
     @OneToOne
-    @JoinColumn(name = "shipping_addr_id")//?
     private Address shippingAddr;
 
     @Embedded
@@ -38,7 +38,7 @@ public class Order {
 
     private String orderStatus;
 
-    private int TotalItem;
+    private int totalItem;
     private LocalDateTime createdAt;
 
     public Order(){
@@ -58,7 +58,7 @@ public class Order {
         this.totalDiscountPrice = totalDiscountPrice;
         this.discount = discount;
         this.orderStatus = orderStatus;
-        TotalItem = totalItem;
+        this.totalItem = totalItem;
         this.createdAt = createdAt;
     }
 
@@ -111,7 +111,7 @@ public class Order {
     }
 
     public void setTotalItem(int totalItem) {
-        TotalItem = totalItem;
+        this.totalItem = totalItem;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
@@ -167,7 +167,7 @@ public class Order {
     }
 
     public int getTotalItem() {
-        return TotalItem;
+        return totalItem;
     }
 
     public LocalDateTime getCreatedAt() {
