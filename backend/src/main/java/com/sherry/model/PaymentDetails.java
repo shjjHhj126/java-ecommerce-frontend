@@ -5,22 +5,12 @@ public class PaymentDetails {
     private String paymentStatus;
     private String paymentId;
 
-    private String razorpayId;
-    private String razorpayPaymentLinkId;
-    private String razorpayPaymentRefId;
-    private String razorpayPaymentLinkStatus;
+    private String paypalId;
+    private String paypalLinkId;
+    private String paypalRefId;
+    private String paypalLinkStatus;
 
-public PaymentDetails(){}
-
-    public PaymentDetails(String paymentMethod, String paymentStatus, String paymentId, String razorpayId, String razorpayPaymentLinkId, String razorpayPaymentRefId, String razorpayPaymentLinkStatus) {
-        this.paymentMethod = paymentMethod;
-        this.paymentStatus = paymentStatus;
-        this.paymentId = paymentId;
-        this.razorpayId = razorpayId;
-        this.razorpayPaymentLinkId = razorpayPaymentLinkId;
-        this.razorpayPaymentRefId = razorpayPaymentRefId;
-        this.razorpayPaymentLinkStatus = razorpayPaymentLinkStatus;
-    }
+    public PaymentDetails(){}
 
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
@@ -34,20 +24,20 @@ public PaymentDetails(){}
         this.paymentId = paymentId;
     }
 
-    public void setRazorpayId(String razorpayId) {
-        this.razorpayId = razorpayId;
+    public void setPaypalId(String paypalId) {
+        this.paypalId = paypalId;
     }
 
-    public void setRazorpayPaymentLinkId(String razorpayPaymentLinkId) {
-        this.razorpayPaymentLinkId = razorpayPaymentLinkId;
+    public void setPaypalLinkId(String paypalLinkId) {
+        this.paypalLinkId = paypalLinkId;
     }
 
-    public void setRazorpayPaymentRefId(String razorpayPaymentRefId) {
-        this.razorpayPaymentRefId = razorpayPaymentRefId;
+    public void setPaypalRefId(String paypalRefId) {
+        this.paypalRefId = paypalRefId;
     }
 
-    public void setRazorpayPaymentLinkStatus(String razorpayPaymentLinkStatus) {
-        this.razorpayPaymentLinkStatus = razorpayPaymentLinkStatus;
+    public void setPaypalLinkStatus(String paypalLinkStatus) {
+        this.paypalLinkStatus = paypalLinkStatus;
     }
 
     public String getPaymentMethod() {
@@ -62,19 +52,19 @@ public PaymentDetails(){}
         return paymentId;
     }
 
-    public String getRazorpayId() {
-        return razorpayId;
+    public String getPaypalId() {
+        return paypalId;
     }
 
-    public String getRazorpayPaymentLinkId() {
-        return razorpayPaymentLinkId;
+    public String getPaypalLinkId() {
+        return paypalLinkId;
     }
 
-    public String getRazorpayPaymentRefId() {
-        return razorpayPaymentRefId;
+    public String getPaypalRefId() {
+        return paypalRefId;
     }
 
-    public String getRazorpayPaymentLinkStatus() {
-        return razorpayPaymentLinkStatus;
+    public String getPaypalLinkStatus() {
+        return paypalLinkStatus;
     }
 }

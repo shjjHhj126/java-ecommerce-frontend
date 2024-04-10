@@ -53,7 +53,6 @@ C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com
 C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\service\UserService.java
 C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\model\Rating.java
 C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\repository\UserRepository.java
-C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\controller\PaymentController.java
 C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\controller\OrderController.java
 C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\repository\ReviewRepository.java
 C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\service\CartService.java
@@ -67,3 +66,4 @@ C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com
 C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\request\AddItemRequest.java
 C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\service\ProductServiceImplementation.java
 C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\service\ReviewServiceImplementation.java
+C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\model\PaypalItem.java

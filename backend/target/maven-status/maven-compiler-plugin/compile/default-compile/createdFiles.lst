@@ -21,6 +21,7 @@ com\sherry\service\ProductServiceImplementation.class
 com\sherry\response\ApiResponse.class
 com\sherry\model\Category.class
 com\sherry\model\Rating.class
+com\sherry\model\PaypalItem.class
 com\sherry\repository\OrderItemRepository.class
 com\sherry\config\JwtProvider.class
 com\sherry\controller\CartItemController.class
@@ -41,7 +42,6 @@ com\sherry\model\PaymentInfo.class
 com\sherry\service\CartItemService.class
 com\sherry\controller\UserProductController.class
 com\sherry\repository\AddressRepository.class
-com\sherry\controller\PaymentController.class
 com\sherry\controller\ReviewController.class
 com\sherry\request\AddItemRequest.class
 com\sherry\exception\CartItemException.class

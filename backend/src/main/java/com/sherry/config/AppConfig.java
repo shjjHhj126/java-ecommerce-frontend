@@ -56,5 +56,13 @@ public class AppConfig {
         return new BCryptPasswordEncoder();
     }
 
-
+//    @Configuration
+//    public class PaypalConfiguration {
+//        @Bean
+//        public PayPalHttpClient getPaypalClient(
+//                @Value("{CLIENT_ID}")String clientId,
+//                @Value("{CLIENT_SECRET}")String clientSecret) {
+//            return new PayPalHttpClient(new PayPalEnvironment.Sandbox(clientId, clientSecret));
+//        }
+//    }
 }
