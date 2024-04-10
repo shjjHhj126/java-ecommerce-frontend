@@ -5,18 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="870d2634-cc62-460d-a40e-ca9b52542bed" name="Changes" comment="x">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/request/UpdateItemRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/sherry/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/config/AppConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/config/AppConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/config/AppConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/customer/Auth/AuthModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/Auth/AuthModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/sherry/controller/CartItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/controller/CartItemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/sherry/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/sherry/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/sherry/service/CartItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/service/CartItemService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/sherry/service/CartItemServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/service/CartItemServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/sherry/service/CartServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/service/CartServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/CartItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/CartItemController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/ProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/CartItemServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/CartItemServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/CartServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/CartServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/config/apiConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/config/apiConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/customer/Auth/Action.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/customer/Auth/ActionType.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/customer/Auth/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/Auth/LoginForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/customer/Auth/Reducer.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/customer/Auth/RegisterForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/Auth/RegisterForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/customer/Routes/CustomerRoutes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/Routes/CustomerRoutes.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/customer/components/Cart/Cart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/components/Cart/Cart.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/customer/components/Cart/CartItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/components/Cart/CartItem.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/customer/components/Navigation/Navigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/components/Navigation/Navigation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/customer/components/Product/Product.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/components/Product/Product.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/customer/components/Product/ProductCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/components/Product/ProductCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/customer/components/ProductDetails/ProductDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/components/ProductDetails/ProductDetails.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/redux/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/store.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

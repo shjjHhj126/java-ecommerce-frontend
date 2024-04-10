@@ -11,7 +11,7 @@ import Logout from "@mui/icons-material/Logout";
 import { useNavigate, useLocation } from "react-router-dom";
 import AuthModal from "../../Auth/AuthModal";
 import { useDispatch, useSelector } from "react-redux";
-import { signup, getUser, logout } from "../../Auth/Action";
+import { signup, getUser, logout } from "../../../redux/Auth/Action";
 
 const navigation = {
   categories: [
@@ -155,7 +155,7 @@ export default function Navigation() {
   const [openAuthModal, setOpenAuthModal] = useState(false);
 
   const jwt = localStorage.getItem("jwt");
-  const { auth } = useSelector((state) => state);
+  const { auth } = useSelector((store) => store);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -515,7 +515,13 @@ export default function Navigation() {
                       aria-controls={open ? "account-menu" : undefined}
                       aria-haspopup="true"
                       aria-expanded={open ? "true" : undefined}>
-                      <Avatar sx={{ width: 32, height: 32 }}>
+                      <Avatar
+                        sx={{
+                          width: 32,
+                          height: 32,
+                          bgcolor: "black",
+                          border: "double 3px",
+                        }}>
                         <p className="text-xs">{auth.user?.firstName}</p>
                       </Avatar>
                     </IconButton>

@@ -7,6 +7,7 @@ import com.sherry.model.CartItem;
 import com.sherry.model.Product;
 import com.sherry.model.User;
 import com.sherry.repository.CartItemRepository;
+import com.sherry.request.UpdateItemRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -27,19 +28,19 @@ public class CartItemServiceImplementation implements CartItemService{
         cartItem.setPrice(cartItem.getProduct().getPrice()*cartItem.getQuantity());
         cartItem.setDiscountPrice(cartItem.getProduct().getDiscountPrice()*cartItem.getQuantity());
 
-        CartItem createdCartItem = cartItemRepository.save(cartItem);
-        return createdCartItem;
+        CartItem savedCartItem = cartItemRepository.save(cartItem);
+        return savedCartItem;
     }
 
     @Override
-    public CartItem updateCartItem(Long userId, Long id, CartItem cartItem) throws CartItemException, UserException {
+    public CartItem updateCartItem(Long userId, Long id, UpdateItemRequest req) throws CartItemException, UserException {
         CartItem item = findCartItemById(id);
         User user = userService.findUserById(userId);
 
         if(user.getId().equals(userId)){
-            item.setQuantity(cartItem.getQuantity());
-            item.setPrice(item.getQuantity()*item.getProduct().getPrice());
-            item.setDiscountPrice(item.getQuantity()*item.getProduct().getDiscountPrice());
+            item.setQuantity(req.getQuantity());
+            item.setPrice(req.getQuantity()*item.getProduct().getPrice());
+            item.setDiscountPrice(req.getQuantity()*item.getProduct().getDiscountPrice());
         }
 
         return cartItemRepository.save(item);

@@ -16,7 +16,7 @@ public interface ProductRepository extends JpaRepository<Product,Long> {//<Produ
             "ORDER BY " +
             "CASE WHEN :sort = 'price_low' THEN p.discountPrice END ASC, " +
             "CASE WHEN :sort = 'price_high' THEN p.discountPrice END DESC"
-    )
+    )//p.discountPrice BETWEEN :minPrice and :maxPrice, after discount, the actual selling price is between min and max
     public List<Product> filterProducts(// @Param() purpose: so JPQL can make query: SELECT p FROM Product p WHERE p.category = :category
             @Param("category") String category,
             @Param("minPrice") Integer minPrice,

@@ -12,6 +12,7 @@ import {
   LOGOUT_REQ,
 } from "./ActionType";
 import axios from "axios";
+import { api } from "../../config/apiConfig";
 
 const signupReq = () => ({ type: SIGNUP_REQ });
 const signupSuccess = (user) => ({ type: SIGNUP_SUCCESS, payload: user });
@@ -30,7 +31,7 @@ export const signup = (data) => async (dispatch) => {
   dispatch(signupReq());
 
   try {
-    const res = await axios.post(`${API_BASE_URL}/auth/signup`, data);
+    const res = await api.post("/auth/signup", data);
     const user = res.data;
 
     if (user.jwt) {
@@ -48,7 +49,7 @@ export const login = (data) => async (dispatch) => {
   dispatch(loginReq());
 
   try {
-    const res = await axios.post(`${API_BASE_URL}/auth/login`, data);
+    const res = await api.post("/auth/login", data);
     const user = res.data;
     if (user.jwt) {
       localStorage.setItem("jwt", user.jwt);
@@ -63,7 +64,7 @@ export const getUser = (jwt) => async (dispatch) => {
   dispatch(getUserReq());
 
   try {
-    const res = await axios.get(`${API_BASE_URL}/api/users/profile`, {
+    const res = await api.get(`/api/users/profile`, {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },

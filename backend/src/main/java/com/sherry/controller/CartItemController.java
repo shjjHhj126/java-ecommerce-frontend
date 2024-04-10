@@ -4,6 +4,7 @@ import com.sherry.exception.CartItemException;
 import com.sherry.exception.UserException;
 import com.sherry.model.CartItem;
 import com.sherry.model.User;
+import com.sherry.request.UpdateItemRequest;
 import com.sherry.response.ApiResponse;
 import com.sherry.service.CartItemService;
 import com.sherry.service.UserService;
@@ -23,12 +24,11 @@ public class CartItemController {
     private UserService userService;
 
     @PutMapping("/{cartItemId}")
-    public ResponseEntity<CartItem> updateCartItem(@PathVariable Long cartItemId,  @RequestHeader("Authorization")String jwt)
+    public ResponseEntity<CartItem> updateCartItem(@PathVariable Long cartItemId, @RequestBody UpdateItemRequest req , @RequestHeader("Authorization")String jwt)
             throws UserException, CartItemException
     {
         User user = userService.findUserProfileByJwt(jwt);
-        CartItem cartItem = cartItemService.findCartItemById(cartItemId);
-        CartItem updatedCartItem = cartItemService.updateCartItem(user.getId(), cartItemId, cartItem);
+        CartItem updatedCartItem = cartItemService.updateCartItem(user.getId(), cartItemId, req);
 
         return new ResponseEntity<>(updatedCartItem, HttpStatus.OK);
     }

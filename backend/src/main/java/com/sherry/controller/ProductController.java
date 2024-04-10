@@ -34,6 +34,7 @@ public class ProductController {
                 minDiscount, sort, stock, pageNum, pageSize
         );
         System.out.println("Complete products");
+
         return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
     }
 

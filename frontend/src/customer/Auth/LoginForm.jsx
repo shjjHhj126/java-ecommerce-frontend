@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import { Grid, TextField, Button } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signup, getUser, login } from "./Action";
+import { getUser, login } from "../../redux/Auth/Action";
 
 const LoginForm = ({ handleClose }) => {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const jwt = localStorage.getItem("jwt");
-  const { auth } = useSelector((state) => state);
+  const { auth } = useSelector((store) => store);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

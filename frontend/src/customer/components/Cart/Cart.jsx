@@ -1,10 +1,23 @@
-import React from "react";
+import { useEffect } from "React";
 import CartItem from "./CartItem";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getCart } from "../../../redux/Cart/Action";
 
 const Cart = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { cart } = useSelector((store) => store);
+
+  const handleCheckout = () => {
+    navigate("/checkout?step=2");
+  };
+
+  useEffect(() => {
+    dispatch(getCart());
+  }, []);
+
   return (
     <div className="flex flex-col">
       <div className="uppercase font-semibold text-lg tracking-wider px-5 py-6">
@@ -23,8 +36,8 @@ const Cart = () => {
           </div>
 
           <hr />
-          {[1, 1, 1].map((item, index) => (
-            <CartItem key={index} />
+          {cart.cart?.cartItems.map((item, index) => (
+            <CartItem key={index} item={item} />
           ))}
         </div>
 
@@ -37,11 +50,12 @@ const Cart = () => {
             <div className="w-[350px] h-[240px] border-[1px] border-black px-4 py-5 tracking-wider flex flex-col gap-2">
               <div className="flex justify-between">
                 <p>Subtotal (3)</p>
-                <p>$500.00</p>
+                <p>${cart.cart?.totalPrice}</p>
               </div>
               <div className="flex justify-between">
                 <p>DISCOUNT</p>
-                <p>-$200.00</p>
+                <p>-${cart.cart?.discount}</p>
+                {/*change sign of discount */}
               </div>
               <div className="flex justify-between">
                 <p>Delivery Charges</p>
@@ -53,14 +67,16 @@ const Cart = () => {
               <hr className="my-4" />
               <div className="flex justify-between">
                 <p className="font-semibold tracking-normal">Estimated Total</p>
-                <p className="font-semibold">$124.95</p>
+                <p className="font-semibold">
+                  ${cart.cart?.totalDiscountPrice}
+                </p>
               </div>
             </div>
           </div>
 
           <div className="w-full px-6 mt-3">
             <Button
-              onClick={() => navigate("/checkout?step=2")}
+              onClick={handleCheckout}
               variant="contained"
               sx={{
                 height: "50px",

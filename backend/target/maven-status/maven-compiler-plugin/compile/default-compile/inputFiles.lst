@@ -40,6 +40,7 @@ C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com
 C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\model\PaymentDetails.java
 C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\service\OrderItemServiceImplementation.java
 C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\controller\RatingController.java
+C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\request\UpdateItemRequest.java
 C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\response\AuthResponse.java
 C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\model\Cart.java
 C:\Users\sherr\OneDrive\Desktop\spring-boot-e-commerce\backend\src\main\java\com\sherry\repository\AddressRepository.java

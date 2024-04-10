@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { Grid, TextField, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signup, getUser } from "./Action";
+import { signup, getUser } from "../../redux/Auth/Action";
 
 const RegisterForm = ({ handleClose }) => {
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
-  const { auth } = useSelector((state) => state);
+  const { auth } = useSelector((store) => store);
 
   useEffect(() => {
     if (jwt) {

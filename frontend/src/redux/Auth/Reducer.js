@@ -10,14 +10,14 @@ import {
   SIGNUP_REQ,
   SIGNUP_SUCCESS,
 } from "./ActionType";
-const initial_state = {
+const initialState = {
   user: null,
   loading: false,
   error: null,
   jwt: null,
 };
 
-export const authReducer = (state = initial_state, action) => {
+export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SIGNUP_REQ:
     case LOGIN_REQ:
@@ -36,7 +36,7 @@ export const authReducer = (state = initial_state, action) => {
       return { ...state, loading: false, error: action.payload };
 
     case LOGOUT_REQ:
-      return { ...initial_state };
+      return { ...initialState };
 
     default:
       return state;
