@@ -11,12 +11,13 @@ import {
   GET_ORDER_BY_ID_FAILURE,
 } from "./ActionType";
 
-export const createOrder = (data) => async (dispatch) => {
+export const createOrder = (dataReq) => async (dispatch) => {
+  console.log("hi");
   dispatch({ type: CREATE_ORDER_REQ });
   try {
-    const { data } = await api.post("/api/orders/", data.address);
+    const { data } = await api.post("/api/orders/", dataReq.address);
     if (data.id) {
-      data.navigate({ search: `step=3&order_id=${data.id}` });
+      dataReq.navigate({ search: `step=3&order_id=${data.id}` });
     }
     console.log("create order - ", data);
     dispatch({ type: CREATE_ORDER_SUCCESS, payload: data });
@@ -29,9 +30,7 @@ export const getOrderById = (orderId) => async (dispatch) => {
   console.log("get order by id -", orderId);
   dispatch({ type: GET_ORDER_BY_ID_REQ });
   try {
-    const { data } = await api.post(`/api/orders/${orderId}`);
-
-    console.log("create order - ", data);
+    const { data } = await api.get(`/api/orders/${orderId}`);
     dispatch({ type: GET_ORDER_BY_ID_SUCCESS, payload: data });
   } catch (err) {
     dispatch({ type: GET_ORDER_BY_ID_FAILURE, payload: err.message });

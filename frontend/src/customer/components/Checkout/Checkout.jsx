@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -13,8 +13,12 @@ const steps = ["Login", "Add delivery Address", "Order Summary", "Payment"];
 export default function Checkout() {
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
-  const urlParams = new URLSearchParams(window.location.search);
-  const step = urlParams.get("step");
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const stepValue = urlParams.get("step");
+    setActiveStep(Number(stepValue));
+  }, [window.location.search]);
 
   const handleNext = () => {
     let newSkipped = skipped;
@@ -49,7 +53,7 @@ export default function Checkout() {
   return (
     <div className="px-10 py-5 lg:px-20 lg:py-10 ">
       <Box sx={{ width: "100%" }}>
-        <Stepper activeStep={activeStep}>
+        <Stepper activeStep={activeStep - 1}>
           {steps.map((label, index) => {
             const stepProps = {};
             const labelProps = {};
@@ -72,7 +76,7 @@ export default function Checkout() {
           </Fragment>
         ) : (
           <Fragment>
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            {/* <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
               <Button
                 color="inherit"
                 disabled={activeStep === 0}
@@ -82,14 +86,14 @@ export default function Checkout() {
               </Button>
               <Box sx={{ flex: "1 1 auto" }} />
 
-              {/* <Button onClick={handleNext}>
+              <Button onClick={handleNext}>
                 {activeStep === steps.length - 1 ? "Finish" : "Next"}
-              </Button> */}
-            </Box>
+              </Button>
+            </Box> */}
 
             <div className="mt-10">
-              {step === "2" && <DeliveryAddressForm />}
-              {step === "3" && <OrderSummary />}
+              {activeStep === 2 && <DeliveryAddressForm />}
+              {activeStep === 3 && <OrderSummary />}
             </div>
           </Fragment>
         )}

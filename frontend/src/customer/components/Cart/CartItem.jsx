@@ -4,7 +4,7 @@ import { IconButton, Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { removeCartItem, updateCartItem } from "../../../redux/Cart/Action";
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, inOrderSummary }) => {
   const dispatch = useDispatch();
 
   const handleUpdateCartItem = (num) => {
@@ -49,38 +49,41 @@ const CartItem = ({ item }) => {
             </p>
           </div>
 
-          <div className="flex items-center mt-4">
-            <IconButton
-              onClick={() => handleUpdateCartItem(-1)}
-              disabled={item.quantity <= 1}>
-              <RemoveCircleOutlineIcon className="text-gray-300" />
-            </IconButton>
-            <span className="py-1 px-9 border rounded-3xl">
-              {item.quantity}
-            </span>
-            <IconButton
-              onClick={() => handleUpdateCartItem(1)}
-              disabled={
-                item.quantity >=
-                item.product.sizes.find((sizeObj) => sizeObj.name == item.size)
-                  ?.quantity
-              }>
-              <AddCircleOutlineIcon className="text-gray-500 " />
-            </IconButton>
-            <Button
-              variant="text"
-              sx={{
-                marginLeft: 6,
-                fontSize: "14px",
-                textTransform: "none",
-                textDecoration: "underline",
-                color: "gray",
-              }}
-              onClick={handleRemoveCartItem}
-              className="ml-6 text-sm text-gray-500 underline">
-              remove
-            </Button>
-          </div>
+          {!inOrderSummary && (
+            <div className="flex items-center mt-4">
+              <IconButton
+                onClick={() => handleUpdateCartItem(-1)}
+                disabled={item.quantity <= 1}>
+                <RemoveCircleOutlineIcon className="text-gray-300" />
+              </IconButton>
+              <span className="py-1 px-9 border rounded-3xl">
+                {item.quantity}
+              </span>
+              <IconButton
+                onClick={() => handleUpdateCartItem(1)}
+                disabled={
+                  item.quantity >=
+                  item.product.sizes.find(
+                    (sizeObj) => sizeObj.name == item.size
+                  )?.quantity
+                }>
+                <AddCircleOutlineIcon className="text-gray-500 " />
+              </IconButton>
+              <Button
+                variant="text"
+                sx={{
+                  marginLeft: 6,
+                  fontSize: "14px",
+                  textTransform: "none",
+                  textDecoration: "underline",
+                  color: "gray",
+                }}
+                onClick={handleRemoveCartItem}
+                className="ml-6 text-sm text-gray-500 underline">
+                remove
+              </Button>
+            </div>
+          )}
         </div>
         <p className="font-semibold">${item.discountPrice}</p>
       </div>

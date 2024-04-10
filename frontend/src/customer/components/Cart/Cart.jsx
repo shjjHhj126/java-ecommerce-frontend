@@ -1,4 +1,4 @@
-import { useEffect } from "React";
+import { useEffect } from "react";
 import CartItem from "./CartItem";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(getCart());
-  }, []);
+  }, [cart.deleteCartItem, cart.updatedCartItem]);
 
   return (
     <div className="flex flex-col">
@@ -37,7 +37,7 @@ const Cart = () => {
 
           <hr />
           {cart.cart?.cartItems.map((item, index) => (
-            <CartItem key={index} item={item} />
+            <CartItem key={index} item={item} inOrderSummary={false} />
           ))}
         </div>
 
@@ -68,7 +68,7 @@ const Cart = () => {
               <div className="flex justify-between">
                 <p className="font-semibold tracking-normal">Estimated Total</p>
                 <p className="font-semibold">
-                  ${cart.cart?.totalDiscountPrice}
+                  ${cart.cart?.totalDiscountPrice + 20}
                 </p>
               </div>
             </div>

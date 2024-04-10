@@ -54,12 +54,19 @@ export const cartReducer = (state = initialState, action) => {
         ...state,
         cartItems: state.cartItems.filter((item) => item.id !== action.payload),
         loading: false,
+        deletedCartItem: action.payload, // the key deletedCartItem not in the initial state
       };
 
     case UPDATE_CART_ITEM_SUCCESS:
+      const updatedItem = action.payload;
+      const updatedCartItems = state.cartItems.map((item) =>
+        item.id === updatedItem.id ? updatedItem : item
+      );
+
       return {
         ...state,
-        cartItems: action.payload,
+        cartItems: updatedCartItems,
+        updatedCartItem: action.payload, // the key updatedCartItem not in the initial state
         loading: false,
       };
     default:

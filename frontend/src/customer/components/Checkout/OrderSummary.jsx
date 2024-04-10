@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AddressCard from "../AddressCard/AddressCard";
 import CartItem from "../Cart/CartItem";
 import { Button } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { getOrderById } from "../../../redux/Order/Action";
 
 const OrderSummary = () => {
+  const dispatch = useDispatch();
+  const searchParams = new URLSearchParams(window.location.search);
+  const orderId = searchParams.get("order_id");
+  const { order } = useSelector((store) => store);
+
+  useEffect(() => {
+    dispatch(getOrderById(orderId));
+  }, [orderId]);
+
   return (
     <div>
       <div className="p-5 shadow-lg rounded-s-md border">
-        <AddressCard />
+        <AddressCard address={order?.order?.shippingAddr} />
       </div>
       <div className="flex flex-col lg:flex-row mt-10">
         {/*left part */}
@@ -22,8 +33,8 @@ const OrderSummary = () => {
           </div>
 
           <hr />
-          {[1, 1, 1].map((item, index) => (
-            <CartItem key={index} />
+          {order.order?.orderItems.map((item, index) => (
+            <CartItem key={index} item={item} inOrderSummary={true} />
           ))}
         </div>
 
@@ -35,12 +46,12 @@ const OrderSummary = () => {
             </p>
             <div className="w-[350px] h-[240px] border-[1px] border-black px-4 py-5 tracking-wider flex flex-col gap-2">
               <div className="flex justify-between">
-                <p>Subtotal (3)</p>
-                <p>$500.00</p>
+                <p>Subtotal ({order.order?.orderItems.length})</p>
+                <p>${order.order?.totalPrice}</p>
               </div>
               <div className="flex justify-between">
                 <p>DISCOUNT</p>
-                <p>-$200.00</p>
+                <p>-${order.order?.discount}</p>
               </div>
               <div className="flex justify-between">
                 <p>Delivery Charges</p>
@@ -52,7 +63,9 @@ const OrderSummary = () => {
               <hr className="my-4" />
               <div className="flex justify-between">
                 <p className="font-semibold tracking-normal">Estimated Total</p>
-                <p className="font-semibold">$124.95</p>
+                <p className="font-semibold">
+                  ${order.order?.totalDiscountPrice + 20}
+                </p>
               </div>
             </div>
           </div>
