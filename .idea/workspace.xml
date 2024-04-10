@@ -6,6 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="870d2634-cc62-460d-a40e-ca9b52542bed" name="Changes" comment="x">
       <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/request/UpdateItemRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/redux/Auth/Action.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/redux/Auth/ActionType.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/redux/Auth/Reducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/redux/Cart/Action.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/redux/Cart/ActionType.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/redux/Cart/Reducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/redux/Order/Action.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/redux/Order/ActionType.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/redux/Order/Reducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/redux/Product/Action.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/redux/Product/ActionType.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/redux/Product/Reducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/sherry/controller/CartItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/controller/CartItemController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/sherry/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/controller/ProductController.java" afterDir="false" />
@@ -13,10 +25,75 @@
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/sherry/service/CartItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/service/CartItemService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/sherry/service/CartItemServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/service/CartItemServiceImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/sherry/service/CartServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/sherry/service/CartServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/Application.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/config/AppConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/config/AppConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/config/JwtConstant.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/config/JwtConstant.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/config/JwtProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/config/JwtProvider.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/config/JwtValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/config/JwtValidator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/AdminOrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/AdminOrderController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/AdminProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/AdminProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/AuthController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/CartController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/CartController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/CartItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/CartItemController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/OrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/OrderController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/PaymentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/PaymentController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/ProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/RatingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/RatingController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/ReviewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/ReviewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/UserProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/controller/UserProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/exception/CartItemException.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/exception/CartItemException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/exception/OrderException.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/exception/OrderException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/exception/ProductException.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/exception/ProductException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/exception/UserException.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/exception/UserException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/Address.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/Address.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/Cart.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/Cart.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/CartItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/CartItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/Category.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/Order.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/OrderItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/OrderItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/PaymentDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/PaymentDetails.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/PaymentInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/PaymentInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/Product.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/Rating.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/Rating.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/Review.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/Review.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/Size.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/Size.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/AddressRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/AddressRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/CartItemRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/CartItemRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/CartRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/CartRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/CategoryRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/CategoryRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/OrderItemRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/OrderItemRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/OrderRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/OrderRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/ProductRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/ProductRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/RatingRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/RatingRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/ReviewRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/ReviewRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/request/AddItemRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/request/AddItemRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/request/CreateProductRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/request/CreateProductRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/request/LoginRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/request/LoginRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/request/RatingRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/request/RatingRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/request/ReviewRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/request/ReviewRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/response/ApiResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/response/ApiResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/response/AuthResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/response/AuthResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/CartItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/CartItemService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/CartItemServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/CartItemServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/CartService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/CartService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/CartServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/CartServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/CustomerUserServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/CustomerUserServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/OrderItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/OrderItemService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/OrderItemServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/OrderItemServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/OrderService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/OrderServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/OrderServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/ProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/ProductServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/ProductServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/RatingService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/RatingService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/RatingServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/RatingServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/ReviewService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/ReviewService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/ReviewServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/ReviewServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/UserServiceImplementation.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/sherry/service/UserServiceImplementation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/config/apiConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/config/apiConfig.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/customer/Auth/Action.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/customer/Auth/ActionType.js" beforeDir="false" />
@@ -80,6 +157,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Application.Application.executor": "Run",
     "Application.debug.executor": "Run",
@@ -202,6 +280,7 @@
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="rm .idea" />
     <MESSAGE value="complete signup, login, logout api" />
     <MESSAGE value="ghjk" />
