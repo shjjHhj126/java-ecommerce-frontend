@@ -4,7 +4,7 @@ import { IconButton, Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { removeCartItem, updateCartItem } from "../../../redux/Cart/Action";
 
-const CartItem = ({ item, inOrderSummary }) => {
+const CartItem = ({ item, isCart }) => {
   const dispatch = useDispatch();
 
   const handleUpdateCartItem = (num) => {
@@ -49,7 +49,7 @@ const CartItem = ({ item, inOrderSummary }) => {
             </p>
           </div>
 
-          {!inOrderSummary && (
+          {isCart && (
             <div className="flex items-center mt-4">
               <IconButton
                 onClick={() => handleUpdateCartItem(-1)}
@@ -83,6 +83,9 @@ const CartItem = ({ item, inOrderSummary }) => {
                 remove
               </Button>
             </div>
+          )}
+          {!isCart && (
+            <p className="text-lg font-semibold mt-3">x {item.quantity}</p>
           )}
         </div>
         <p className="font-semibold">${item.discountPrice}</p>

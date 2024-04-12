@@ -4,8 +4,10 @@ import CartItem from "../Cart/CartItem";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderById } from "../../../redux/Order/Action";
+import { useNavigate } from "react-router-dom";
 
 const OrderSummary = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const searchParams = new URLSearchParams(window.location.search);
   const orderId = searchParams.get("order_id");
@@ -14,6 +16,10 @@ const OrderSummary = () => {
   useEffect(() => {
     dispatch(getOrderById(orderId));
   }, [orderId]);
+
+  const handleCheckout = () => {
+    navigate({ search: `step=4` });
+  };
 
   return (
     <div>
@@ -34,7 +40,7 @@ const OrderSummary = () => {
 
           <hr />
           {order.order?.orderItems.map((item, index) => (
-            <CartItem key={index} item={item} inOrderSummary={true} />
+            <CartItem key={index} item={item} isCart={false} />
           ))}
         </div>
 
@@ -72,6 +78,7 @@ const OrderSummary = () => {
 
           <div className="w-full px-6 mt-3">
             <Button
+              onClick={handleCheckout}
               variant="contained"
               sx={{
                 height: "50px",

@@ -11,7 +11,6 @@ const DeliveryAddressForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("hi");
 
     const data = new FormData(e.currentTarget);
 
@@ -31,12 +30,11 @@ const DeliveryAddressForm = () => {
     };
 
     dispatch(createOrder(orderData));
-    console.log(Address);
   };
   return (
-    <div>
-      <Grid container spacing={4}>
-        <Grid
+    <div className="">
+      <Grid container spacing={4} justifyContent="center">
+        {/* <Grid
           item
           xs={12}
           lg={5}
@@ -44,15 +42,16 @@ const DeliveryAddressForm = () => {
           <div className="p-5 py-7 border-b cursor-pointer">
             <AddressCard />
             <Button
+              type="submit"
               sx={{ mt: 2, bgcolor: "black", color: "white" }}
               size="large"
               variant="contained">
               Deliver Here
             </Button>
           </div>
-        </Grid>
-        <Grid item xs={12} lg={7}>
-          <Box className="border rounded-s-md shodow-md p-5">
+        </Grid> */}
+        <Grid item xs={12} lg={7} justifyContent="center">
+          <Box className="border border-black rounded-s-md shodow-md p-5">
             <form onSubmit={handleSubmit}>
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>

@@ -37,7 +37,7 @@ const Cart = () => {
 
           <hr />
           {cart.cart?.cartItems.map((item, index) => (
-            <CartItem key={index} item={item} inOrderSummary={false} />
+            <CartItem key={index} item={item} isCart={true} />
           ))}
         </div>
 

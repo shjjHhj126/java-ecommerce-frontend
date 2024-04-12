@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import DeliveryAddressForm from "./DeliveryAddressForm";
 import OrderSummary from "./OrderSummary";
+import Payment from "./Payment";
 
 const steps = ["Login", "Add delivery Address", "Order Summary", "Payment"];
 
@@ -51,7 +52,7 @@ export default function Checkout() {
   };
 
   return (
-    <div className="px-10 py-5 lg:px-20 lg:py-10 ">
+    <div className="px-10 py-5 lg:px-20 lg:py-10 w-full">
       <Box sx={{ width: "100%" }}>
         <Stepper activeStep={activeStep - 1}>
           {steps.map((label, index) => {
@@ -64,15 +65,12 @@ export default function Checkout() {
             );
           })}
         </Stepper>
+
         {activeStep === steps.length ? (
           <Fragment>
-            <Typography sx={{ mt: 2, mb: 1 }}>
-              All steps completed - you&apos;re finished
-            </Typography>
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Box sx={{ flex: "1 1 auto" }} />
-              <Button onClick={handleReset}>Reset</Button>
-            </Box>
+            <div className="mt-10">
+              <Payment />
+            </div>
           </Fragment>
         ) : (
           <Fragment>
@@ -91,7 +89,7 @@ export default function Checkout() {
               </Button>
             </Box> */}
 
-            <div className="mt-10">
+            <div className="mt-10 w-full">
               {activeStep === 2 && <DeliveryAddressForm />}
               {activeStep === 3 && <OrderSummary />}
             </div>

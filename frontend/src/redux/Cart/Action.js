@@ -50,12 +50,15 @@ export const removeCartItem = (cartItemId) => async (dispatch) => {
 export const updateCartItem = (req) => async (dispatch) => {
   dispatch({ type: UPDATE_CART_ITEM_REQ });
   try {
+    console.log(req);
     const { data } = await api.put(
       `/api/cart_items/${req.cartItemId}`,
       req.data
     );
+    console.log(data.quantity);
     dispatch({ type: UPDATE_CART_ITEM_SUCCESS, payload: data });
   } catch (err) {
+    console.log(err.message);
     dispatch({ type: UPDATE_CART_ITEM_FAILURE, payload: err.message });
   }
 };
