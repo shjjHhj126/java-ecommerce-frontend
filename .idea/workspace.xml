@@ -4,34 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="870d2634-cc62-460d-a40e-ca9b52542bed" name="Changes" comment="x">
-      <change afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/.env" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/config/apiConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/config/apiConfig.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/customer/Auth/AuthModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/Auth/AuthModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/customer/Auth/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/Auth/LoginForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/customer/Auth/RegisterForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/Auth/RegisterForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/customer/components/Cart/Cart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/components/Cart/Cart.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/customer/components/Cart/CartItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/components/Cart/CartItem.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/customer/components/Checkout/Checkout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/components/Checkout/Checkout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/customer/components/Checkout/DeliveryAddressForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/components/Checkout/DeliveryAddressForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/customer/components/Checkout/OrderSummary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/components/Checkout/OrderSummary.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/customer/components/Checkout/Payment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/customer/components/Checkout/Payment.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/redux/Auth/Action.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/Auth/Action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/redux/Auth/ActionType.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/Auth/ActionType.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/redux/Auth/Reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/Auth/Reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/redux/Cart/Action.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/Cart/Action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/redux/Cart/ActionType.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/Cart/ActionType.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/redux/Cart/Reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/Cart/Reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/redux/Order/Action.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/Order/Action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/redux/Order/ActionType.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/Order/ActionType.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/redux/Order/Reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/Order/Reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/redux/Product/Action.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/Product/Action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/redux/Product/ActionType.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/Product/ActionType.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/redux/Product/Reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/Product/Reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/redux/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/redux/store.js" afterDir="false" />
-    </list>
+    <list default="true" id="870d2634-cc62-460d-a40e-ca9b52542bed" name="Changes" comment="x" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
