@@ -12,6 +12,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import AuthModal from "../../Auth/AuthModal";
 import { useDispatch, useSelector } from "react-redux";
 import { signup, getUser, logout } from "../../../redux/Auth/Action";
+import { getCart } from "../../../redux/Cart/Action";
 
 const navigation = {
   categories: [
@@ -149,6 +150,7 @@ export default function Navigation() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const openAccount = Boolean(anchorEl);
@@ -156,7 +158,7 @@ export default function Navigation() {
 
   const jwt = localStorage.getItem("jwt");
   const { auth } = useSelector((store) => store);
-  const dispatch = useDispatch();
+  const { cart } = useSelector((store) => store);
 
   useEffect(() => {
     if (jwt) {
@@ -199,6 +201,10 @@ export default function Navigation() {
     dispatch(logout());
     handleClose();
   };
+
+  useEffect(() => {
+    dispatch(getCart());
+  }, []);
 
   return (
     <div className="bg-white">
@@ -583,7 +589,7 @@ export default function Navigation() {
                       aria-hidden="true"
                     />
                     <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                      0
+                      {cart ? cart.cartItems.length : 0}
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
                   </a>

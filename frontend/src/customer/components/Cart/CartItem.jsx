@@ -41,10 +41,13 @@ const CartItem = ({ item, isCart }) => {
             <p>Color:&nbsp;{item.product.color},</p>
           </div>
           <div className="flex space-x-3 items-center text-sm text-gray-900 mt-4">
-            <p className="font-semibold">${item.discountPrice}</p>
-            <p className="opacity-50 line-through">${item.price}</p>
+            <p className="font-semibold">${item.product.discountPrice}</p>
+            <p className="opacity-50 line-through">${item.product.price}</p>
             <p className="text-green-600 font-semibold">
-              {Math.round((item.price - item.discountPrice) / item.price) * 100}
+              {Math.round(
+                (item.product.price - item.product.discountPrice) /
+                  item.product.price
+              ) * 100}
               % OFF
             </p>
           </div>

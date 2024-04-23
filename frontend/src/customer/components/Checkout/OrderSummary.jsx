@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderById } from "../../../redux/Order/Action";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../../config/apiConfig";
 
 const OrderSummary = () => {
   const navigate = useNavigate();
@@ -18,7 +19,13 @@ const OrderSummary = () => {
   }, [orderId]);
 
   const handleCheckout = () => {
-    navigate({ search: `step=4` });
+    const stripeCheckout = async () => {
+      const urlSearchParams = new URLSearchParams(window.location.search);
+      const orderId = urlSearchParams.get("order_id");
+      const { data } = await api.post(`/api/payment/${orderId}`); //return the stripe checkout page url
+      window.location.href = data; //do not use navigate()
+    };
+    stripeCheckout();
   };
 
   return (
@@ -37,11 +44,11 @@ const OrderSummary = () => {
               price
             </p>
           </div>
-
           <hr />
-          {order.order?.orderItems.map((item, index) => (
-            <CartItem key={index} item={item} isCart={false} />
-          ))}
+          {order.order?.orderItems.map((item, index) => {
+            console.log(item.product);
+            return <CartItem key={index} item={item} isCart={false} />;
+          })}
         </div>
 
         {/*right part */}
