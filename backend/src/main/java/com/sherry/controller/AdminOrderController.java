@@ -64,8 +64,6 @@ public class AdminOrderController {
         res.setMessage("order deleted successfully");
         res.setStatus(true);
 
-
-
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

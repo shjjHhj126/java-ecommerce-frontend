@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 
 import java.time.LocalDate;
 
+//currently not use, stripe handles it
 public class PaymentInfo {
     @Column(name="cardOwner_name")
     private String cardOwnerName;

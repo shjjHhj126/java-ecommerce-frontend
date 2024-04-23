@@ -95,9 +95,15 @@ public class OrderServiceImplementation implements OrderService {
     };
 
     @Override
+    public Order setOrdersPaymentId(Long orderId, String paymentId)throws OrderException{
+        Order order = findOrderById(orderId);
+        order.getPaymentDetails().setPaymentId(paymentId);
+        return orderRepository.save(order);
+    }
+    @Override
     public Order placedOrder(Long orderId)throws OrderException{
         Order order = findOrderById(orderId);
-        order.setOrderStatus("PLACED");
+        order.setOrderStatus("PAID");
         order.getPaymentDetails().setPaymentStatus("COMPLETED");
         return orderRepository.save(order);
     }

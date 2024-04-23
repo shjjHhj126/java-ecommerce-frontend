@@ -29,7 +29,6 @@ public class OrderController {
         User user = userService.findUserProfileByJwt(jwt);
         Order order = orderService.createOrder(user, shippingAddr);
 
-        System.out.println("order:" + order);
         return new ResponseEntity<>(order, HttpStatus.CREATED);
     }
 
