@@ -6,9 +6,7 @@ com\sherry\service\ReviewServiceImplementation.class
 com\sherry\controller\AdminOrderController.class
 com\sherry\repository\CartRepository.class
 com\sherry\repository\CategoryRepository.class
-com\sherry\request\RatingRequest.class
 com\sherry\config\AppConfig.class
-com\sherry\model\User.class
 com\sherry\repository\ReviewRepository.class
 com\sherry\repository\UserRepository.class
 com\sherry\service\CartItemServiceImplementation.class
@@ -56,7 +54,6 @@ com\sherry\exception\OrderException.class
 com\sherry\service\ProductService.class
 com\sherry\Application.class
 com\sherry\request\CreateProductRequest.class
-com\sherry\service\RatingService.class
 com\sherry\config\JwtConstant.class
 com\sherry\repository\ProductRepository.class
 com\sherry\model\Size.class

@@ -29,6 +29,7 @@ public class ProductController {
                                                                       @RequestParam Integer pageNum,
                                                                       @RequestParam Integer pageSize
                                                                       ){
+        System.out.println("hi a good start");
         Page<Product> res = productService.getAllProducts(
                 category, color, size, minPrice, maxPrice,
                 minDiscount, sort, stock, pageNum, pageSize

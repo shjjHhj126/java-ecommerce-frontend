@@ -24,7 +24,7 @@ public class AdminProductController {
         return new ResponseEntity<>(product, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{productId}/delete")
+    @DeleteMapping("/delete/{productId}")
     public ResponseEntity<ApiResponse> createProduct(@PathVariable Long productId)throws ProductException {
         productService.deleteProduct(productId);
         ApiResponse res = new ApiResponse();
@@ -39,7 +39,7 @@ public class AdminProductController {
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
-    @GetMapping("/{productId}/update")
+    @PutMapping("/update/{productId}")
     public ResponseEntity<Product> updateProduct(@RequestBody Product req, @PathVariable Long productId)throws ProductException{
         Product product = productService.updateProduct(productId, req);//this will throw ProductException
         return new ResponseEntity<>(product, HttpStatus.CREATED);
