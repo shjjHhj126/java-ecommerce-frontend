@@ -1,4 +1,3 @@
-import { API_BASE_URL } from "../../config/apiConfig";
 import {
   SIGNUP_REQ,
   SIGNUP_SUCCESS,

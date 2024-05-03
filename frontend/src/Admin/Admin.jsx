@@ -63,7 +63,7 @@ const Admin = () => {
             onClick={() => navigate(item.path)}>
             <ListItemButton>
               <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText>{item.name}</ListItemText>
+              {isLargeScreen && <ListItemText>{item.name}</ListItemText>}
             </ListItemButton>
           </ListItem>
         ))}
@@ -75,7 +75,7 @@ const Admin = () => {
             <ListItemIcon>
               <AccountCircleIcon />
             </ListItemIcon>
-            <ListItemText>Account</ListItemText>
+            {isLargeScreen && <ListItemText>Account</ListItemText>}
           </ListItemButton>
         </ListItem>
       </List>
@@ -87,9 +87,11 @@ const Admin = () => {
         <CssBaseline />
         {/*normalize styles across different browsers by applying some base styles. It resets some default styles like margins, paddings, and font sizes to ensure consistent rendering across browsers*/}
 
-        <div className="w-[15%] border-r-[1px]">{drawer}</div>
+        <div className="w-[15%] border-r-[1px] h-full fixed top-0">
+          {drawer}
+        </div>
 
-        <div className="w-[85%]">
+        <div className="w-[85%] ml-[15%]">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/products" element={<ProductsTable />} />
