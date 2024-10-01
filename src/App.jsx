@@ -1,10 +1,10 @@
 import "./App.css";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import CustomerRoutes from "./routes/CustomerRoutes";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import AdminRoutes from "./routes/AdminRoutes";
+import CustomerRoutes from "./routes/CustomerRoutes";
 
 function App() {
   return (
