@@ -26,14 +26,18 @@ import CustomersTable from "./pages/CustomersTable";
 import OrdersTable from "./pages/OrdersTable";
 
 const menu = [
-  { name: "Dashboard", icon: <DashboardIcon />, path: "/admin" },
-  { name: "Products", icon: <Inventory />, path: "/admin/products" },
-  { name: "Customers", icon: <EmojiPeopleIcon />, path: "/admin/customers" },
-  { name: "Orders", icon: <GradingIcon />, path: "/admin/orders" },
+  { name: "Dashboard", icon: <DashboardIcon />, path: "/management" },
+  { name: "Products", icon: <Inventory />, path: "/management/products" },
+  {
+    name: "Customers",
+    icon: <EmojiPeopleIcon />,
+    path: "/management/customers",
+  },
+  { name: "Orders", icon: <GradingIcon />, path: "/management/orders" },
   {
     name: "AddProducts",
     icon: <AddShoppingCartIcon />,
-    path: "/admin/product/create",
+    path: "/management/products/create",
   },
 ];
 
@@ -95,7 +99,7 @@ const Admin = () => {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/products" element={<ProductsTable />} />
-            <Route path="/product/create" element={<CreateProductForm />} />
+            <Route path="/products/create" element={<CreateProductForm />} />
             <Route path="/customers" element={<CustomersTable />} />
             <Route path="/orders" element={<OrdersTable />} />
           </Routes>

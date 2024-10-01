@@ -12,12 +12,20 @@ import {
   GET_CART_SUCCESS,
   GET_CART_FAILURE,
 } from "./ActionType";
-import { api } from "../../config/apiConfig";
+import { api } from "../../config/ApiConfig";
+const accessToken = localStorage.getItem("accessToken");
 
 export const getCart = () => async (dispatch) => {
   dispatch({ type: GET_CART_REQ });
+
   try {
-    const { data } = await api.get("/api/cart/");
+    //Todo:allow to choose cart item and add to order
+    const { data } = await api.get("/carts?pageNum=0&pageSize=3", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
     dispatch({ type: GET_CART_SUCCESS, payload: data });
   } catch (err) {
     dispatch({ type: GET_CART_FAILURE, payload: err.message });
@@ -27,10 +35,14 @@ export const getCart = () => async (dispatch) => {
 export const addItemToCart = (req) => async (dispatch) => {
   dispatch({ type: ADD_ITEM_TO_CART_REQ });
   try {
-    const { data } = await api.put("/api/cart/add", req);
+    console.log(req);
+    const { data } = await api.post("/carts", req, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
     dispatch({ type: ADD_ITEM_TO_CART_SUCCESS, payload: data });
-    // console.log("data", data);
   } catch (err) {
     console.log(err);
     dispatch({ type: ADD_ITEM_TO_CART_FAILURE, payload: err.message });
@@ -40,7 +52,11 @@ export const addItemToCart = (req) => async (dispatch) => {
 export const removeCartItem = (cartItemId) => async (dispatch) => {
   dispatch({ type: REMOVE_CART_ITEM_REQ });
   try {
-    const { data } = await api.delete(`/api/cart_items/${cartItemId}`);
+    const { data } = await api.delete(`/carts/${cartItemId}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     dispatch({ type: REMOVE_CART_ITEM_SUCCESS, payload: cartItemId });
   } catch (err) {
     dispatch({ type: REMOVE_CART_ITEM_FAILURE, payload: err.message });
@@ -51,11 +67,11 @@ export const updateCartItem = (req) => async (dispatch) => {
   dispatch({ type: UPDATE_CART_ITEM_REQ });
   try {
     console.log(req);
-    const { data } = await api.put(
-      `/api/cart_items/${req.cartItemId}`,
-      req.data
-    );
-    console.log(data.quantity);
+    const { data } = await api.patch(`/carts/${req.cartItemId}`, req.data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     dispatch({ type: UPDATE_CART_ITEM_SUCCESS, payload: data });
   } catch (err) {
     console.log(err.message);

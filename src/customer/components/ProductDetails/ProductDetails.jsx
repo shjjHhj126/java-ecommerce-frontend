@@ -5,11 +5,13 @@ import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
 import ProductReviewCard from "./ProductReviewCard";
 import HomeSectionCarousel from "../HomeSectionCarousel/HomeSectionCarousel";
 import HomeSectionCard from "../HomeSectionCard/HomeSectionCard";
-import { men_suits } from "../../../Data/Men/men_suits";
+import { men_suits } from "../../../data/Men/men_suits";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { findProductById } from "../../../redux/Product/Action";
 import { addItemToCart } from "../../../redux/Cart/Action";
+import generateProperties from "./helpers/generateProperties";
+import findVarByOptions from "./helpers/findVarByOptions";
 
 const productt = {
   name: "Basic Tee 6-Pack",
@@ -65,20 +67,42 @@ function classNames(...classes) {
 }
 
 export default function ProductDetails() {
-  const [selectedColor, setSelectedColor] = useState(productt.colors[0]);
-  const [selectedSize, setSelectedSize] = useState(productt.sizes[2]);
-  const { product } = useSelector((store) => store);
+  const { product } = useSelector((store) => store.product);
   const navigate = useNavigate();
   const params = useParams();
   const dispatch = useDispatch();
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [mainUrl, setMainUrl] = useState("");
+  const [totalItemNum, setTotalItemNum] = useState(0);
+  const [selectedVars, setSelectedVars] = useState([]);
+
+  const [properties, setProperties] = useState(new Map());
+
+  const handleOptionChange = (index, option) => {
+    const updatedOptions = [...selectedOptions];
+
+    if (updatedOptions[index] && updatedOptions[index].value === option.value) {
+      updatedOptions[index] = null;
+    } else {
+      updatedOptions[index] = option;
+
+      if (index === 0 && option.url) {
+        setMainUrl(option.url);
+      }
+    }
+    setSelectedOptions((old) => updatedOptions);
+  };
 
   const handleAddToCart = () => {
+    const prdVarId = findVarByOptions(product, selectedOptions);
+
     const data = {
-      productId: params.productId,
-      size: selectedSize.name,
+      prdVarId,
+      quantity: 1,
     };
+
     dispatch(addItemToCart(data));
-    navigate("/cart");
+    // navigate("/cart");
   };
 
   useEffect(() => {
@@ -86,77 +110,105 @@ export default function ProductDetails() {
     dispatch(findProductById(data));
   }, [params.productId]);
 
+  useEffect(() => {
+    if (product && product.propertyList) {
+      setProperties(generateProperties(product.propertyList));
+      // Initialize selectedOptions based on product's propertyList
+      setSelectedOptions(Array(properties.size).fill(null));
+      setTotalItemNum(
+        product.productVariantList.reduce(
+          (total, variant) => total + variant.quantity,
+          0
+        )
+      );
+    }
+  }, [product]);
+
+  const compareOption = (a, b) => {
+    if (
+      typeof a !== "object" ||
+      typeof b !== "object" ||
+      a === null ||
+      b === null
+    )
+      return false;
+
+    return a.name === b.name && a.value === b.value && a.url === b.url;
+  };
+
+  // dynamic render totalItemNum and selectedVars
+  useEffect(() => {
+    if (product && product.productVariantList) {
+      let updatedSelectedVars = product.productVariantList;
+      for (const selectedOpObj of selectedOptions) {
+        if (selectedOpObj) {
+          updatedSelectedVars = updatedSelectedVars.filter((variant) =>
+            variant.propertyList.some(
+              (property) =>
+                property.name === selectedOpObj.name &&
+                property.value !== selectedOpObj.value
+            )
+          );
+        }
+      }
+      setSelectedVars(updatedSelectedVars);
+      setTotalItemNum(
+        updatedSelectedVars.reduce(
+          (total, variant) => total + variant.quantity,
+          0
+        )
+      );
+    }
+  }, [selectedOptions, product]);
+
   return (
     <div className="bg-white lg:px-20">
       <div className="pt-6">
-        {/* <nav aria-label="Breadcrumb">
-          <ol
-            role="list"
-            className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-            {product.breadcrumbs.map((breadcrumb) => (
-              <li key={breadcrumb.id}>
-                <div className="flex items-center">
-                  <a
-                    href={breadcrumb.href}
-                    className="mr-2 text-sm font-medium text-gray-900">
-                    {breadcrumb.name}
-                  </a>
-                  <svg
-                    width={16}
-                    height={20}
-                    viewBox="0 0 16 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    className="h-5 w-4 text-gray-300">
-                    <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                  </svg>
-                </div>
-              </li>
-            ))}
-            <li className="text-sm">
-              <a
-                href={product.href}
-                aria-current="page"
-                className="font-medium text-gray-500 hover:text-gray-600">
-                {product.name}
-              </a>
-            </li>
-          </ol>
-        </nav> */}
-
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-10 px-4 pt-10">
           {/* Image gallery */}
           <div className="flex flex-col items-center">
-            <div className="overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
+            <div className="overflow-hidden rounded-lg w-full aspect-square">
               <img
-                src={product.product?.imageUrl}
-                alt=""
+                src={mainUrl.length != 0 ? mainUrl : product?.imgList[0]}
+                alt="main picture"
                 className="h-full w-full object-cover object-center"
               />
             </div>
             <div className="flex flex-wrap space-x-5 justify-center">
-              {productt.images.map((image) => (
+              {product?.imgList.map((url) => (
                 <div
-                  key={image.src}
+                  key={url}
+                  onClick={() => setMainUrl(url)}
                   className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg max-w-[5rem] max-h-[5rem] mt-4">
                   <img
-                    src={image.src}
-                    alt={image.alt}
+                    src={url}
+                    alt="product image"
                     className="h-full w-full object-cover object-center"
                   />
                 </div>
               ))}
+              {product?.propertyList.map((item) =>
+                item.url ? (
+                  <div
+                    key={item.url}
+                    onClick={() => setMainUrl(item.url)}
+                    className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg max-w-[5rem] max-h-[5rem] mt-4">
+                    <img
+                      src={item.url}
+                      alt="product property image"
+                      className="h-full w-full object-cover object-center"
+                    />
+                  </div>
+                ) : null
+              )}
             </div>
           </div>
 
           {/* Product info */}
           <div className="lg:col-span-1 max-h-auto max-w-2xl px-4 sm:px-6 pb-16 lg:max-w-7xl lg:px-8 lg:pb-24">
             <div className="lg:col-span-2 ">
-              <h1 className="text-lg lg:text-xl font-semibold text-gray-900">
-                {product.product?.brand}
-              </h1>
-              <h1 className="text-lg lg:text-xl text-gray-900 opacity-60 pt-1">
-                {product.product?.title}
+              <h1 className="text-lg lg:text-2xl text-black pt-1">
+                {product?.name}
               </h1>
             </div>
 
@@ -175,140 +227,117 @@ export default function ProductDetails() {
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <div className="flex space-x-5 items-center text-lg lg:text-xl text-gray-900 mt-6">
-                <p className="font-semibold">
-                  ${product.product?.discountPrice}
-                </p>
-                <p className="opacity-50 line-through">
-                  ${product.product?.price}
-                </p>
-                <p className="text-green-600 font-semibold">
-                  {product.product?.discountPercent}% OFF
-                </p>
+                {product?.discountPrice ? (
+                  <>
+                    <p className="font-semibold">${product?.discountPrice}</p>
+                    <p className="opacity-50 line-through">${product?.price}</p>
+                  </>
+                ) : (
+                  <p className="font-semibold">${product?.price}</p>
+                )}
               </div>
 
               <form className="mt-10">
-                {/* Sizes */}
                 <div className="mt-10">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                  </div>
+                  {properties.length !== 0 &&
+                    [...properties.entries()].map(([key, values], index) => (
+                      <div key={index}>
+                        <div className="flex items-center justify-between">
+                          <h3 className="text-sm font-medium text-gray-900">
+                            {key}
+                          </h3>
+                        </div>
 
-                  <RadioGroup
-                    value={selectedSize}
-                    onChange={setSelectedSize}
-                    className="mt-4">
-                    <RadioGroup.Label className="sr-only">
-                      Choose a size
-                    </RadioGroup.Label>
-                    <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                      {productt.sizes.map((size) => (
-                        <RadioGroup.Option
-                          key={size.name}
-                          value={size}
-                          disabled={!size.inStock}
-                          className={({ active }) =>
-                            classNames(
-                              size.inStock
-                                ? "cursor-pointer bg-white text-gray-900 shadow-sm"
-                                : "cursor-not-allowed bg-gray-50 text-gray-200",
-                              active ? "ring-2 ring-indigo-500" : "",
-                              "group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6"
-                            )
-                          }>
-                          {({ active, checked }) => (
-                            <>
-                              <RadioGroup.Label as="span">
-                                {size.name}
-                              </RadioGroup.Label>
-                              {size.inStock ? (
-                                <span
-                                  className={classNames(
-                                    active ? "border" : "border-2",
+                        <RadioGroup
+                          value={selectedOptions[index] || null} // Manage value independently
+                          by={compareOption}
+                          onChange={(value) => handleOptionChange(index, value)} // Update only the selected option for this group
+                          className="mt-2 mb-4">
+                          <div className="grid grid-cols-3 gap-4 md:grid-cols-4 lg:grid-cols-3">
+                            {values.map((obj) => (
+                              <RadioGroup.Option
+                                key={obj.name + obj.value}
+                                value={{
+                                  name: key,
+                                  value: obj.value,
+                                  url: obj.url,
+                                }}
+                                className={({ active, checked }) =>
+                                  classNames(
                                     checked
-                                      ? "border-indigo-500"
-                                      : "border-transparent",
-                                    "pointer-events-none absolute -inset-px rounded-md"
-                                  )}
-                                  aria-hidden="true"
-                                />
-                              ) : (
-                                <span
-                                  aria-hidden="true"
-                                  className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200">
-                                  <svg
-                                    className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
-                                    viewBox="0 0 100 100"
-                                    preserveAspectRatio="none"
-                                    stroke="currentColor">
-                                    <line
-                                      x1={0}
-                                      y1={100}
-                                      x2={100}
-                                      y2={0}
-                                      vectorEffect="non-scaling-stroke"
+                                      ? "cursor-pointer bg-white text-gray-900 shadow-sm ring-2 ring-indigo-500"
+                                      : "cursor-pointer bg-white text-gray-900 shadow-sm",
+                                    "group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6"
+                                  )
+                                }>
+                                {({ active, checked }) => (
+                                  <>
+                                    <RadioGroup.Label
+                                      as="span"
+                                      className="flex items-center">
+                                      {obj.url && (
+                                        <img
+                                          className="aspect-square object-cover w-10 h-10 mr-2"
+                                          src={obj.url}
+                                          alt={obj.value}
+                                        />
+                                      )}
+                                      <p>{obj.value}</p>
+                                    </RadioGroup.Label>
+                                    <span
+                                      className={classNames(
+                                        checked
+                                          ? "border-indigo-500"
+                                          : "border-transparent",
+                                        "pointer-events-none absolute -inset-px rounded-md"
+                                      )}
+                                      aria-hidden="true"
                                     />
-                                  </svg>
-                                </span>
-                              )}
-                            </>
-                          )}
-                        </RadioGroup.Option>
-                      ))}
-                    </div>
-                  </RadioGroup>
+                                  </>
+                                )}
+                              </RadioGroup.Option>
+                            ))}
+                          </div>
+                        </RadioGroup>
+                      </div>
+                    ))}
                 </div>
 
-                <Button
-                  variant="contained"
-                  onClick={handleAddToCart}
-                  sx={{
-                    px: "2rem",
-                    py: "1rem",
-                    bgColor: "black",
-                    marginTop: "10px",
-                    bgcolor: "black",
-                    "&:hover": {
-                      bgcolor: "black", // Change background color on hover
-                    },
-                  }}>
-                  Add to Bag
-                </Button>
+                <div className="flex items-center gap-2 mt-7">
+                  <Button
+                    variant="contained"
+                    onClick={handleAddToCart}
+                    disabled={
+                      totalItemNum === 0 ||
+                      selectedOptions.length != properties.size
+                    }
+                    sx={{
+                      px: "2rem",
+                      py: "1rem",
+                      bgColor: "black",
+                      bgcolor: "black",
+                      "&:hover": {
+                        bgcolor: "black", // Change background color on hover
+                      },
+                    }}>
+                    Add to Bag
+                  </Button>
+                  <p className="letter-spacing-2 text-sm font-semibold">
+                    {totalItemNum} items left
+                  </p>
+                </div>
               </form>
             </div>
 
             <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
               {/* Description and details */}
               <div>
-                <h3 className="sr-only">Description</h3>
+                <h3 className="sr-only">Description aresdyfugftreery</h3>
 
                 <div className="space-y-6">
                   <p className="text-base text-gray-900">
-                    {product.product?.description}
+                    {product?.description}
                   </p>
-                </div>
-              </div>
-
-              {/* <div className="mt-10">
-                <h3 className="text-sm font-medium text-gray-900">
-                  Highlights
-                </h3>
-
-                <div className="mt-4">
-                  <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                    {product.highlights.map((highlight) => (
-                      <li key={highlight} className="text-gray-400">
-                        <span className="text-gray-600">{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div> */}
-
-              <div className="mt-10">
-                <h2 className="text-sm font-medium text-gray-900">Details</h2>
-
-                <div className="mt-4 space-y-6">
-                  <p className="text-sm text-gray-600">{product.details}</p>
                 </div>
               </div>
             </div>

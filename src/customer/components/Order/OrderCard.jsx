@@ -9,6 +9,8 @@ const OrderCard = ({ order }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  console.log(order);
+
   function SelfDefPaper({ orderItem }) {
     return (
       <Paper
@@ -39,6 +41,54 @@ const OrderCard = ({ order }) => {
       </Paper>
     );
   }
+
+  const renderPaymentStatus = (status) => {
+    switch (status) {
+      case "PENDING":
+        return "To be Charged";
+      case "COMPLETED":
+        return "About to Deliver";
+      case "FAILED":
+        return "Payment Failed";
+      default:
+        return "Unknown Status";
+    }
+  };
+
+  const renderOrderState = (status) => {
+    switch (status) {
+      case "PENDING":
+        return "Order Pending";
+      case "CONFIRMED":
+        return "Order Confirmed";
+      case "SHIPPING":
+        return "Order is Shipping";
+      case "DELIVERED":
+        return "Order Delivered";
+      case "CANCELED":
+        return "Order Canceled";
+      default:
+        return "Unknown State";
+    }
+  };
+
+  const renderShippingStatus = (status) => {
+    switch (status) {
+      case "PENDING":
+        return "Awaiting Shipment";
+      case "SHIPPED":
+        return "Shipped";
+      case "OUT_FOR_DELIVERY":
+        return "Out for Delivery";
+      case "DELIVERED":
+        return "Delivered";
+      case "CANCELED":
+        return "Shipping Canceled";
+      default:
+        return "Unknown Shipping Status";
+    }
+  };
+
   return (
     <div
       onClick={() => navigate(`/account/order/${3}`)}
@@ -47,7 +97,7 @@ const OrderCard = ({ order }) => {
         container
         spacing={2}
         sx={{ justifyContent: "space-between", height: "100%" }}>
-        <Grid item xs={5.5}>
+        {/* <Grid item xs={5.5}>
           <div className="flex cursor-pointer h-[150px] w-full">
             <Carousel
               className="w-full h-full"
@@ -72,40 +122,24 @@ const OrderCard = ({ order }) => {
               ))}
             </Carousel>
           </div>
+        </Grid> */}
+        <Grid item xs={0.5}>
+          <p>{order.id}</p>
+        </Grid>
+        <Grid item xs={1}>
+          <p>{order.serialNum}</p>
         </Grid>
         <Grid item xs={0.5}>
-          <p>${order.totalDiscountPrice}</p>
+          <p>${order.sellingPrice}</p>
         </Grid>
-        <Grid item xs={4}>
-          {order.paymentDetails.paymentStatus === "PENDING" && (
-            <div>
-              <p>
-                <ArrowRightIcon
-                  sx={{ width: "30px", height: "30px" }}
-                  className="text-black mr-2 text-sm"
-                />
-                <span>To be Charged</span>
-              </p>
-            </div>
-          )}
-          {order.paymentDetails.paymentStatus === "COMPLETED" && (
-            <p>
-              <ArrowRightIcon
-                sx={{ width: "30px", height: "30px" }}
-                className="text-black mr-2 text-sm"
-              />
-              <span>Waiting for Confirmed</span>
-            </p>
-          )}
-          {/* {order.paymentDetails.orderStatus === "CONFIRMED" && (
-            <p>
-              <ArrowRightIcon
-                sx={{ width: "15px", height: "15px" }}
-                className="text-black"
-              />
-              <span>About to Deliver</span>
-            </p>
-          )} */}
+        <Grid item xs={2}>
+          <p>{renderPaymentStatus(order.payment.status)}</p>
+        </Grid>
+        <Grid item xs={2}>
+          <p>{renderOrderState(order.orderStateRecordList[0].state)}</p>
+        </Grid>
+        <Grid item xs={2}>
+          <p>{renderShippingStatus(order.shippingRecordList[0].state)}</p>
         </Grid>
       </Grid>
     </div>

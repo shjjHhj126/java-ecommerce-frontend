@@ -9,12 +9,15 @@ import {
   SIGNUP_FAILURE,
   SIGNUP_REQ,
   SIGNUP_SUCCESS,
+  REFRESH_FAILURE,
+  REFRESH_REQ,
+  REFRESH_SUCCESS,
 } from "./ActionType";
+
 const initialState = {
   user: null,
   loading: false,
   error: null,
-  jwt: null,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -22,17 +25,25 @@ export const authReducer = (state = initialState, action) => {
     case SIGNUP_REQ:
     case LOGIN_REQ:
     case GETUSER_REQ:
+    case REFRESH_REQ:
       return { ...state, loading: true, error: null };
 
     case SIGNUP_SUCCESS:
     case LOGIN_SUCCESS:
-      return { ...state, loading: false, error: null, jwt: action.payload };
+    case REFRESH_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+      };
+
     case GETUSER_SUCCESS:
       return { ...state, loading: false, error: null, user: action.payload };
 
     case SIGNUP_FAILURE:
     case LOGIN_FAILURE:
     case GETUSER_FAILURE:
+    case REFRESH_FAILURE:
       return { ...state, loading: false, error: action.payload };
 
     case LOGOUT_REQ:

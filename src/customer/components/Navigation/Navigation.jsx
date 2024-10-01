@@ -11,136 +11,10 @@ import Logout from "@mui/icons-material/Logout";
 import { useNavigate, useLocation } from "react-router-dom";
 import AuthModal from "../../Auth/AuthModal";
 import { useDispatch, useSelector } from "react-redux";
-import { signup, getUser, logout } from "../../../redux/Auth/Action";
+import { signup, getUser, logout, refresh } from "../../../redux/Auth/Action";
 import { getCart } from "../../../redux/Cart/Action";
-
-const navigation = {
-  categories: [
-    {
-      id: "women",
-      name: "Women",
-      featured: [
-        {
-          name: "New Arrivals",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
-          imageAlt:
-            "Models sitting back to back, wearing Basic Tee in black and bone.",
-        },
-        {
-          name: "Basic Tees",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg",
-          imageAlt:
-            "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.",
-        },
-      ],
-      sections: [
-        {
-          id: "clothing",
-          name: "Clothing",
-          items: [
-            { name: "Tops", href: "#" },
-            { name: "Dresses", href: "#" },
-            { name: "Pants", href: "#" },
-            { name: "Denim", href: "#" },
-            { name: "Sweaters", href: "#" },
-            { name: "T-Shirts", href: "#" },
-            { name: "Jackets", href: "#" },
-            { name: "Browse All", href: "#" },
-          ],
-        },
-        {
-          id: "accessories",
-          name: "Accessories",
-          items: [
-            { name: "Watches", href: "#" },
-            { name: "Wallets", href: "#" },
-            { name: "Bags", href: "#" },
-            { name: "Sunglasses", href: "#" },
-            { name: "Hats", href: "#" },
-            { name: "Belts", href: "#" },
-          ],
-        },
-        {
-          id: "brands",
-          name: "Brands",
-          items: [
-            { name: "Full Nelson", href: "#" },
-            { name: "My Way", href: "#" },
-            { name: "Re-Arranged", href: "#" },
-            { name: "Counterfeit", href: "#" },
-            { name: "Significant Other", href: "#" },
-          ],
-        },
-      ],
-    },
-    {
-      id: "men",
-      name: "Men",
-      featured: [
-        {
-          name: "New Arrivals",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg",
-          imageAlt:
-            "Drawstring top with elastic loop closure and textured interior padding.",
-        },
-        {
-          name: "Artwork Tees",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg",
-          imageAlt:
-            "Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.",
-        },
-      ],
-      sections: [
-        {
-          id: "clothing",
-          name: "Clothing",
-          items: [
-            { name: "Suits", href: "#" },
-            { name: "Pants", href: "#" },
-            { name: "Sweaters", href: "#" },
-            { name: "T-Shirts", href: "#" },
-            { name: "Jackets", href: "#" },
-            { name: "Browse All", href: "#" },
-          ],
-        },
-        {
-          id: "accessories",
-          name: "Accessories",
-          items: [
-            { name: "Watches", href: "#" },
-            { name: "Wallets", href: "#" },
-            { name: "Bags", href: "#" },
-            { name: "Sunglasses", href: "#" },
-            { name: "Hats", href: "#" },
-            { name: "Belts", href: "#" },
-          ],
-        },
-        {
-          id: "brands",
-          name: "Brands",
-          items: [
-            { name: "Re-Arranged", href: "#" },
-            { name: "Counterfeit", href: "#" },
-            { name: "Full Nelson", href: "#" },
-            { name: "My Way", href: "#" },
-          ],
-        },
-      ],
-    },
-  ],
-  pages: [
-    { name: "Company", href: "#" },
-    { name: "Stores", href: "#" },
-  ],
-};
+import { jwtDecode } from "jwt-decode";
+import { findCategories, findProducts } from "../../../redux/Product/Action";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -148,6 +22,9 @@ function classNames(...classes) {
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchParam, setSearchParam] = useState("");
+
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -155,25 +32,60 @@ export default function Navigation() {
   const [anchorEl, setAnchorEl] = useState(null);
   const openAccount = Boolean(anchorEl);
   const [openAuthModal, setOpenAuthModal] = useState(false);
+  const storedAccessToken = localStorage.getItem("accessToken");
+  const storedRefreshToken = localStorage.getItem("refreshToken");
 
-  const jwt = localStorage.getItem("jwt");
-  const { auth } = useSelector((store) => store);
-  const { cart } = useSelector((store) => store);
+  const { user } = useSelector((store) => store.auth);
+  const { cart, cartItems } = useSelector((store) => store.cart);
+  const { categories } = useSelector((store) => store.product);
 
-  useEffect(() => {
-    if (jwt) {
-      dispatch(getUser(jwt)); //refetch jwt in Action.js
+  // for search visibility
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+  };
+
+  // to search depends on the searchParam on click icon
+  const handleSearch = () => {
+    if (searchParam.trim()) {
+      navigate(`/search?searchParam=${searchParam}`);
     }
-  }, [jwt, auth.jwt]);
+  };
+
+  // to search depends on the searchParam on enter.
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
 
   useEffect(() => {
-    if (auth.user) {
+    // get user profile
+    if (storedAccessToken) {
+      dispatch(getUser(storedAccessToken));
+    }
+
+    // refresh token
+    if (storedAccessToken && storedRefreshToken) {
+      const tokenDecoded = jwtDecode(storedAccessToken);
+      const currentTime = Math.floor(Date.now() / 1000); // second
+      if (tokenDecoded.exp - currentTime < 5 * 60) {
+        dispatch(refresh(storedRefreshToken));
+      }
+    }
+  }, [storedAccessToken]);
+
+  useEffect(() => {
+    if (user) {
       handleClose(); //close menu
     }
     if (location.pathname == "/login" || location.pathname == "/signup") {
       navigate(-1);
     }
-  }, [auth.user]);
+  }, [user]);
+
+  useEffect(() => {
+    dispatch(findCategories());
+  }, []);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -183,8 +95,16 @@ export default function Navigation() {
     setAnchorEl(null);
   };
 
-  const handleCategoryClick = (category, section, item, close) => {
-    navigate(`/${category.id}/${section.id}/${item.name}`);
+  const handleCategoryClick = (category, sub, close) => {
+    navigate(`/search?categoryId=${sub.id}`);
+    const data = {
+      categoryId: sub.id,
+      pageSize: 3,
+      pageNum: 1,
+      sort: "price_low",
+    };
+    dispatch(findProducts(data));
+    console.log("a good start");
     close();
   };
 
@@ -245,76 +165,32 @@ export default function Navigation() {
 
                 {/* Links */}
                 <Tab.Group as="div" className="mt-2">
-                  <div className="border-b border-gray-200">
-                    <Tab.List className="-mb-px flex space-x-8 px-4">
-                      {navigation.categories.map((category) => (
-                        <Tab
-                          key={category.name}
-                          className={({ selected }) =>
-                            classNames(
-                              selected
-                                ? "border-indigo-600 text-indigo-600"
-                                : "border-transparent text-gray-900",
-                              "flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium"
-                            )
-                          }>
-                          {category.name}
-                          {/*dont know */}
-                        </Tab>
-                      ))}
-                    </Tab.List>
-                  </div>
                   <Tab.Panels as={Fragment}>
-                    {navigation.categories.map((category) => (
+                    {categories?.map((category) => (
                       <Tab.Panel
                         key={category.name}
-                        className="space-y-10 px-4 pb-8 pt-10 ">
-                        <div className="grid grid-cols-2 gap-x-4">
-                          {category.featured.map((item) => (
-                            <div
-                              key={item.name}
-                              className="group relative text-sm">
-                              <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                <img
-                                  src={item.imageSrc}
-                                  alt={item.imageAlt}
-                                  className="object-cover object-center"
-                                />
-                              </div>
-                              <a
-                                href={item.href}
-                                className="mt-6 block font-medium text-gray-900">
-                                <span
-                                  className="absolute inset-0 z-10"
-                                  aria-hidden="true"
-                                />{" "}
-                                {item.name}
-                              </a>
-
-                              <p aria-hidden="true" className="mt-1">
-                                Shop now
-                              </p>
-                            </div>
-                          ))}
-                        </div>
-                        {category.sections.map((section) => (
-                          <div key={section.name}>
+                        className="space-y-10 px-4 pb-8 pt-10 bg-white ">
+                        {categories?.map((category) => (
+                          <div key={category.id}>
                             <p
-                              id={`${category.id}-${section.id}-heading-mobile`}
+                              id={`${category.id}-heading-mobile`}
                               className="font-medium text-gray-900">
-                              {section.name}
+                              {category.name}
                             </p>
                             <ul
                               role="list"
-                              aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
+                              aria-labelledby={`${category.id}-ul-heading-mobile`}
                               className="mt-6 flex flex-col space-y-6">
-                              {section.items.map((item) => (
-                                <li key={item.name} className="flow-root">
-                                  <a
-                                    href={item.href}
-                                    className="-m-2 block p-2 text-gray-500">
-                                    {item.name}
-                                  </a>
+                              {category.subcategories.map((sub) => (
+                                <li
+                                  key={sub.name}
+                                  className="flow-root cursor-pointer"
+                                  onClick={() =>
+                                    handleCategoryClick(category, sub, close)
+                                  }>
+                                  <p className="block p-4 rounded-lg bg-black text-white  transition-colors ">
+                                    {sub.name}
+                                  </p>
                                 </li>
                               ))}
                             </ul>
@@ -324,29 +200,6 @@ export default function Navigation() {
                     ))}
                   </Tab.Panels>
                 </Tab.Group>
-
-                {/*pages: Company, Stores */}
-                <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                  {navigation.pages.map((page) => (
-                    <div key={page.name} className="flow-root">
-                      <a
-                        href={page.href}
-                        className="-m-2 block p-2 font-medium text-gray-900">
-                        {page.name}
-                      </a>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                  <div className="flow-root">
-                    <a
-                      href="#"
-                      className="-m-2 block p-2 font-medium text-gray-900">
-                      Sign in
-                    </a>
-                  </div>
-                </div>
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -388,7 +241,7 @@ export default function Navigation() {
               {/* Flyout menus */}
               <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
                 <div className="flex h-full space-x-8">
-                  {navigation.categories.map((category) => (
+                  {categories?.map((category) => (
                     <Popover key={category.name} className="flex">
                       {({ open, close }) => (
                         <>
@@ -403,7 +256,6 @@ export default function Navigation() {
                               {category.name}
                             </Popover.Button>
                           </div>
-
                           <Transition
                             as={Fragment}
                             enter="transition ease-out duration-200"
@@ -420,76 +272,30 @@ export default function Navigation() {
                                 className="absolute inset-0 top-1/2 bg-white shadow"
                                 aria-hidden="true"
                               />
-
-                              <div className="relative bg-white">
-                                <div className="mx-auto max-w-7xl px-8">
-                                  <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
-                                    <div className="col-start-2 grid grid-cols-2 gap-x-8">
-                                      {category.featured.map((item) => (
-                                        <div
-                                          key={item.name}
-                                          className="group relative text-base sm:text-sm">
-                                          <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                            <img
-                                              src={item.imageSrc}
-                                              alt={item.imageAlt}
-                                              className="object-cover object-center"
-                                            />
-                                          </div>
-                                          {/*images */}
-                                          <a
-                                            href={item.href}
-                                            className="mt-6 block font-medium text-gray-900">
-                                            <span
-                                              className="absolute inset-0 z-10"
-                                              aria-hidden="true"
-                                            />
-                                            {item.name}
-                                          </a>
-                                          <p
-                                            aria-hidden="true"
-                                            className="mt-1">
-                                            Shop now
+                              <div className="relative bg-gray-50">
+                                <div className="mx-auto max-w-7xl px-4 py-8">
+                                  <div className="grid grid-cols-6 gap-6">
+                                    {category.subcategories.map((sub) => (
+                                      <div
+                                        key={sub.name}
+                                        onClick={() =>
+                                          handleCategoryClick(
+                                            category,
+                                            sub,
+                                            close
+                                          )
+                                        }
+                                        className="relative overflow-hidden rounded-lg bg-black shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer">
+                                        <div className="p-6 flex flex-col justify-center items-center text-white text-center">
+                                          <p className="text-lg font-semibold mb-2">
+                                            {sub.name}
+                                          </p>
+                                          <p className="text-sm font-medium">
+                                            Explore
                                           </p>
                                         </div>
-                                      ))}
-                                    </div>
-                                    <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
-                                      {category.sections.map((section) => (
-                                        <div key={section.name}>
-                                          <p
-                                            id={`${section.name}-heading`}
-                                            className="font-medium text-gray-900">
-                                            {section.name}
-                                            {/*Clothing, Accessories, Brand */}
-                                          </p>
-                                          <ul
-                                            role="list"
-                                            aria-labelledby={`${section.name}-heading`}
-                                            className="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
-                                            {section.items.map((item) => (
-                                              <li
-                                                key={item.name}
-                                                className="flex">
-                                                <p
-                                                  onClick={() =>
-                                                    handleCategoryClick(
-                                                      category,
-                                                      section,
-                                                      item,
-                                                      close
-                                                    )
-                                                  }
-                                                  className="hover:text-gray-800 cursor-pointer">
-                                                  {item.name}
-                                                  {/*Tops, Dresses, Pants */}
-                                                </p>
-                                              </li>
-                                            ))}
-                                          </ul>
-                                        </div>
-                                      ))}
-                                    </div>
+                                      </div>
+                                    ))}
                                   </div>
                                 </div>
                               </div>
@@ -499,21 +305,12 @@ export default function Navigation() {
                       )}
                     </Popover>
                   ))}
-
-                  {navigation.pages.map((page) => (
-                    <a
-                      key={page.name}
-                      href={page.href}
-                      className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">
-                      {page.name}
-                    </a>
-                  ))}
                 </div>
               </Popover.Group>
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  {auth.user?.firstName ? (
+                  {user?.firstName ? (
                     <IconButton
                       onClick={handleClick}
                       size="small"
@@ -528,7 +325,7 @@ export default function Navigation() {
                           bgcolor: "black",
                           border: "double 3px",
                         }}>
-                        <p className="text-xs">{auth.user?.firstName}</p>
+                        <p className="text-xs">{user?.firstName}</p>
                       </Avatar>
                     </IconButton>
                   ) : (
@@ -570,7 +367,24 @@ export default function Navigation() {
 
                 {/* Search */}
                 <div className="flex lg:ml-6">
-                  <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
+                  {/* Search Input Area */}
+                  {isSearchOpen && (
+                    <div className="ml-4">
+                      <input
+                        value={searchParam}
+                        onChange={(e) => setSearchParam(e.target.value)}
+                        onKeyUp={handleKeyPress}
+                        type="text"
+                        className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        placeholder="Search products..."
+                      />
+                    </div>
+                  )}
+
+                  {/* Search Icon */}
+                  <a
+                    onClick={toggleSearch}
+                    className="p-2 text-gray-400 hover:text-gray-500">
                     <span className="sr-only">Search</span>
                     <MagnifyingGlassIcon
                       className="h-6 w-6"
@@ -589,7 +403,7 @@ export default function Navigation() {
                       aria-hidden="true"
                     />
                     <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                      {cart ? cart.cartItems.length : 0}
+                      {cartItems ? cartItems.length : 0}
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
                   </a>

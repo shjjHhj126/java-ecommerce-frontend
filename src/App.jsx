@@ -1,11 +1,10 @@
 import "./App.css";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-
-import CustomerRoutes from "./Routes/CustomerRoutes";
+import CustomerRoutes from "./routes/CustomerRoutes";
 import store from "./redux/store";
 import { Provider } from "react-redux";
-import AdminRoutes from "./Routes/AdminRoutes";
+import AdminRoutes from "./routes/AdminRoutes";
 
 function App() {
   return (
@@ -14,7 +13,7 @@ function App() {
         <Provider store={store}>
           <Routes>
             <Route path="/*" element={<CustomerRoutes />} />
-            <Route path="/admin/*" element={<AdminRoutes />} />
+            <Route path="/management/*" element={<AdminRoutes />} />
           </Routes>
         </Provider>
       </BrowserRouter>

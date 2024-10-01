@@ -12,7 +12,11 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProductById, findProducts } from "../../redux/Product/Action";
+import {
+  deleteProductById,
+  findCategories,
+  findProducts,
+} from "../../redux/Product/Action";
 import styled from "@emotion/styled";
 
 const ProductsTable = () => {
@@ -37,28 +41,33 @@ const ProductsTable = () => {
   }));
 
   const handleDeleteProduct = (productId) => {
+    console.log("delete product id = " + productId);
     dispatch(deleteProductById(productId));
   };
 
   const dispatch = useDispatch();
-  const { product } = useSelector((store) => store);
-  // console.log("products:", product);
+  const { products, product, categories, deletedProduct } = useSelector(
+    (store) => store.product
+  );
+  console.log(products);
 
   useEffect(() => {
     const data = {
-      category: "men_suits",
-      color: [],
-      size: [],
-      minPrice: 0,
-      maxPrice: 1000000000,
-      minDiscount: 0,
       sort: "price_low",
       pageNum: 0, //must -1
       pageSize: 10,
-      stock: "",
     };
     dispatch(findProducts(data));
-  }, [product.deletedProduct]);
+  }, [deletedProduct]);
+
+  useEffect(() => {
+    const data = {
+      sort: "price_low",
+      pageNum: 0, //must -1
+      pageSize: 10,
+    };
+    dispatch(findProducts(data));
+  }, []);
 
   return (
     <div className="px-5 py-5">
@@ -82,6 +91,9 @@ const ProductsTable = () => {
                 Price
               </StyledTableCell>
               <StyledTableCell sx={{ color: "black" }} align="left">
+                Discount Price
+              </StyledTableCell>
+              <StyledTableCell sx={{ color: "black" }} align="left">
                 Quantity
               </StyledTableCell>
               <StyledTableCell sx={{ color: "black" }} align="left">
@@ -90,7 +102,7 @@ const ProductsTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {product?.products?.content?.map((item) => (
+            {products?.content?.map((item) => (
               <StyledTableRow
                 key={item.id}
                 sx={{
@@ -104,19 +116,22 @@ const ProductsTable = () => {
                   {item.id}
                 </StyledTableCell>
                 <StyledTableCell sx={{ color: "black" }} align="left">
-                  <Avatar variant="square" src={item.imageUrl} />
+                  <Avatar variant="square" src={item.imgList[0]} />
                 </StyledTableCell>
                 <StyledTableCell sx={{ color: "black" }} align="left">
-                  {item.title}
+                  {item.name}
                 </StyledTableCell>
                 <StyledTableCell sx={{ color: "black" }} align="left">
-                  {item.category.name}
+                  {item.parentCategory.name}/{item.category.name}
                 </StyledTableCell>
                 <StyledTableCell sx={{ color: "black" }} align="left">
                   {item.price}
                 </StyledTableCell>
                 <StyledTableCell sx={{ color: "black" }} align="left">
-                  {item.quantity}
+                  {item.discountPrice ? item.discountPrice : ""}
+                </StyledTableCell>
+                <StyledTableCell sx={{ color: "black" }} align="left">
+                  {item.totalQuantity}
                 </StyledTableCell>
                 <StyledTableCell sx={{ color: "black" }} align="left">
                   <Button

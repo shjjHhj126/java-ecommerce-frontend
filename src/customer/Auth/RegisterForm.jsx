@@ -7,14 +7,14 @@ import { signup, getUser } from "../../redux/Auth/Action";
 const RegisterForm = ({ handleClose }) => {
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const jwt = localStorage.getItem("jwt");
-  const { auth } = useSelector((store) => store);
+  const storedAccessToken = localStorage.getItem("accessToken");
+  const { user } = useSelector((store) => store.auth);
 
   useEffect(() => {
-    if (jwt) {
-      dispatch(getUser(jwt)); //refetch jwt in Action.js
+    if (storedAccessToken) {
+      dispatch(getUser(storedAccessToken));
     }
-  }, [jwt, auth.jwt]); //jwt might change in localStorage or in redux
+  }, [storedAccessToken]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,6 +25,7 @@ const RegisterForm = ({ handleClose }) => {
       lastName: data.lastName.value,
       email: data.email.value,
       password: data.password.value,
+      role: "USER",
     };
 
     dispatch(signup(userData));

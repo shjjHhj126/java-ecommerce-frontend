@@ -7,8 +7,8 @@ import { getUser, login } from "../../redux/Auth/Action";
 const LoginForm = ({ handleClose }) => {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
-  const jwt = localStorage.getItem("jwt");
-  const { auth } = useSelector((store) => store);
+  const storedAccessToken = localStorage.getItem("accessToken");
+  const { user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -27,10 +27,10 @@ const LoginForm = ({ handleClose }) => {
   };
 
   useEffect(() => {
-    if (jwt) {
-      dispatch(getUser(jwt)); //refetch jwt in Action.js
+    if (storedAccessToken) {
+      dispatch(getUser(storedAccessToken));
     }
-  }, [jwt, auth.jwt]);
+  }, [storedAccessToken]);
 
   return (
     <div>

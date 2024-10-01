@@ -1,22 +1,50 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CartItem from "./CartItem";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCart } from "../../../redux/Cart/Action";
+import { createOrder } from "../../../redux/Order/Action";
 
 const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { cart } = useSelector((store) => store);
+  const { cart, cartItems, deletedCartItem, updatedCartItem } = useSelector(
+    (store) => store.cart
+  );
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalDiscountPrice, setTotalDiscountPrice] = useState(0);
 
   const handleCheckout = () => {
-    navigate("/checkout?step=2");
+    const cartItemIds = cartItems.map((item) => item.id);
+    const data = {
+      cartItemIdList: cartItemIds,
+      navigate,
+    };
+    dispatch(createOrder(data));
   };
 
   useEffect(() => {
     dispatch(getCart());
-  }, [cart.deleteCartItem, cart.updatedCartItem]);
+  }, []);
+
+  useEffect(() => {
+    if (cartItems && cartItems.length != 0) {
+      const totalPrice = cartItems.reduce((total, item) => {
+        return total + item.productDetailResponse.price;
+      }, 0);
+      setTotalPrice(totalPrice);
+
+      const totalDiscountPrice = cartItems.reduce((total, item) => {
+        return total + (item.productDetailResponse.discountPrice || 0);
+      }, 0);
+      setTotalDiscountPrice(totalDiscountPrice);
+    }
+  }, [cartItems]);
+
+  useEffect(() => {
+    dispatch(getCart());
+  }, [deletedCartItem, updatedCartItem]);
 
   return (
     <div className="flex flex-col">
@@ -36,9 +64,13 @@ const Cart = () => {
           </div>
 
           <hr />
-          {cart.cart?.cartItems.map((item, index) => (
-            <CartItem key={index} item={item} isCart={true} />
-          ))}
+          {cartItems && cartItems.length > 0 ? (
+            cartItems.map((item) => (
+              <CartItem key={item.id} item={item} isCart={true} />
+            ))
+          ) : (
+            <p>Your cart is empty</p>
+          )}
         </div>
 
         {/*right part */}
@@ -50,11 +82,11 @@ const Cart = () => {
             <div className="w-[350px] h-[240px] border-[1px] border-black px-4 py-5 tracking-wider flex flex-col gap-2">
               <div className="flex justify-between">
                 <p>Subtotal (3)</p>
-                <p>${cart.cart?.totalPrice}</p>
+                <p>${totalPrice}</p>
               </div>
               <div className="flex justify-between">
                 <p>DISCOUNT</p>
-                <p>-${cart.cart?.discount}</p>
+                <p>-${totalDiscountPrice}</p>
                 {/*change sign of discount */}
               </div>
               <div className="flex justify-between">
@@ -68,7 +100,7 @@ const Cart = () => {
               <div className="flex justify-between">
                 <p className="font-semibold tracking-normal">Estimated Total</p>
                 <p className="font-semibold">
-                  ${cart.cart?.totalDiscountPrice + 20}
+                  ${totalPrice - totalDiscountPrice + 20}
                 </p>
               </div>
             </div>

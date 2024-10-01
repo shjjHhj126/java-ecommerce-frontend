@@ -5,15 +5,16 @@ import { getOrders } from "../../../redux/Order/Action";
 import { useEffect } from "react";
 
 const order_status = [
-  { label: "On the Way", value: "on_the_way" },
-  { label: "Delivered", value: "delivered" },
-  { label: "Cancelled", value: "cancelled" },
-  { label: "Returned", value: "returned" },
+  { label: "Pending", value: "PENDING" },
+  { label: "Confirmed", value: "CONFIRMED" },
+  { label: "Shipping", value: "SHIPPING" },
+  { label: "Delivered", value: "DELIVERED" },
+  { label: "canceled", value: "CANCELED" },
 ];
 
 const Order = () => {
   const dispatch = useDispatch();
-  const { order } = useSelector((store) => store);
+  const { order, orders } = useSelector((store) => store.order);
   useEffect(() => {
     dispatch(getOrders());
   }, []);
@@ -42,9 +43,47 @@ const Order = () => {
             </div>
           </div>
         </Grid>
+
         <Grid item xs={9}>
+          <div className="p-5 bg-gray-200 w-full">
+            <Grid
+              container
+              spacing={2}
+              sx={{ justifyContent: "space-between", height: "100%" }}>
+              <Grid item xs={0.5}>
+                <p>
+                  <strong>Order ID</strong>
+                </p>
+              </Grid>
+              <Grid item xs={1}>
+                <p>
+                  <strong>Serial Number</strong>
+                </p>
+              </Grid>
+              <Grid item xs={0.5}>
+                <p>
+                  <strong>Selling Price</strong>
+                </p>
+              </Grid>
+              <Grid item xs={2}>
+                <p>
+                  <strong>Payment Status</strong>
+                </p>
+              </Grid>
+              <Grid item xs={2}>
+                <p>
+                  <strong>Order Status</strong>
+                </p>
+              </Grid>
+              <Grid item xs={2}>
+                <p>
+                  <strong>Shipping Status</strong>
+                </p>
+              </Grid>
+            </Grid>
+          </div>
           <div className="w-full">
-            {order.orders?.map((item, index) => (
+            {orders.orderList?.map((item, index) => (
               <OrderCard key={index} order={item} />
             ))}
           </div>
