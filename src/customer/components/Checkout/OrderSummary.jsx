@@ -24,13 +24,13 @@ const OrderSummary = () => {
   useEffect(() => {
     if (order && order.orderItemList?.length !== 0) {
       const calculatedPrice = order.orderItemList.reduce(
-        (total, item) => total + item.price,
+        (total, item) => total + item.price * item.quantity,
         0
       );
       setPrice(calculatedPrice);
 
       const calculatedDiscountPrice = order.orderItemList.reduce(
-        (total, item) => total + (item.discountPrice || 0),
+        (total, item) => total + (item.discountPrice * item.quantity || 0),
         0
       );
       setDiscountPrice(calculatedDiscountPrice);
@@ -90,7 +90,7 @@ const OrderSummary = () => {
               </div>
               <div className="flex justify-between">
                 <p>DISCOUNT</p>
-                <p>-${discountPrice}</p>
+                <p>-${price - discountPrice}</p>
               </div>
               <div className="flex justify-between">
                 <p>Delivery Charges</p>

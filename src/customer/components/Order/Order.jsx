@@ -19,6 +19,12 @@ const Order = () => {
     dispatch(getOrders());
   }, []);
 
+  const toggleRadio = (value) => {
+    console.log(value);
+    const data = { orderState: value };
+    dispatch(getOrders(data));
+  };
+
   return (
     <div className="mt-10">
       <Grid container sx={{ justifyContent: "space-between" }}>
@@ -31,7 +37,10 @@ const Order = () => {
                 <div key={status.label} className="flex items-center">
                   <input
                     defaultValue={status.value}
-                    type="checkbox"
+                    type="radio"
+                    name="orderStatus" // to make them exclusive selected
+                    id={status.value}
+                    onChange={(e) => toggleRadio(e.target.value)}
                     className="h-4 w-4 border-gray-300 text-gray-700 focus:text-gray-900"></input>
                   <label
                     className="ml-3 text-sm text-gray-700"

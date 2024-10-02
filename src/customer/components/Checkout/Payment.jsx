@@ -5,6 +5,9 @@ import { Avatar } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import PersonIcon from "@mui/icons-material/Person";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStripe } from "@fortawesome/free-brands-svg-icons";
+const accessToken = localStorage.getItem("accessToken");
 
 const Payment = () => {
   const navigate = useNavigate();
@@ -34,8 +37,16 @@ const Payment = () => {
 
   useEffect(() => {
     const fetchSessInfo = async () => {
-      const { data } = await api.post(`/api/payment/setStatus/${orderId}`);
-      //set email, amount
+      const { data } = await api.post(
+        `/payments/set-status`,
+        { orderId },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      // set email, amount
 
       setEmail(data.message.split(",")[0]);
       setAmount(data.message.split(",")[1]);
@@ -80,11 +91,8 @@ const Payment = () => {
           </div>
         )}
 
-        <div className=" bg-gray-200 flex justify-center ">
-          <img
-            className="h-10 object-cover"
-            src="https://firebasestorage.googleapis.com/v0/b/java-ecommerce-69ec1.appspot.com/o/5968382.png?alt=media&token=2f9292fe-1100-413a-b302-104a00214130"
-          />
+        <div className=" bg-gray-200 flex justify-center text-5xl">
+          <FontAwesomeIcon icon={faStripe} />
         </div>
       </div>
     </div>

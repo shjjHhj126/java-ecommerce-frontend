@@ -31,12 +31,15 @@ const Cart = () => {
   useEffect(() => {
     if (cartItems && cartItems.length != 0) {
       const totalPrice = cartItems.reduce((total, item) => {
-        return total + item.productDetailResponse.price;
+        return total + (item.productDetailResponse?.price * item.quantity || 0);
       }, 0);
       setTotalPrice(totalPrice);
 
       const totalDiscountPrice = cartItems.reduce((total, item) => {
-        return total + (item.productDetailResponse.discountPrice || 0);
+        return (
+          total +
+          (item.productDetailResponse?.discountPrice * item.quantity || 0)
+        );
       }, 0);
       setTotalDiscountPrice(totalDiscountPrice);
     }
@@ -86,7 +89,7 @@ const Cart = () => {
               </div>
               <div className="flex justify-between">
                 <p>DISCOUNT</p>
-                <p>-${totalDiscountPrice}</p>
+                <p>-${totalPrice - totalDiscountPrice}</p>
                 {/*change sign of discount */}
               </div>
               <div className="flex justify-between">
@@ -99,9 +102,7 @@ const Cart = () => {
               <hr className="my-4" />
               <div className="flex justify-between">
                 <p className="font-semibold tracking-normal">Estimated Total</p>
-                <p className="font-semibold">
-                  ${totalPrice - totalDiscountPrice + 20}
-                </p>
+                <p className="font-semibold">${totalDiscountPrice + 20}</p>
               </div>
             </div>
           </div>

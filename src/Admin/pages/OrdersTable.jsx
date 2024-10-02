@@ -11,10 +11,14 @@ import {
   TableRow,
   tableCellClasses,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../../redux/Admin/Order/Action";
 import styled from "@emotion/styled";
+import OrderStateDropdownMenu from "../components/OrderStateDropdownMenu";
+import { api } from "../../config/ApiConfig";
+import OrderDetailsModal from "../components/OrderDetailsModal";
+const accessToken = localStorage.getItem("accessToken");
 
 const OrdersTable = () => {
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -38,13 +42,37 @@ const OrdersTable = () => {
   }));
 
   const dispatch = useDispatch();
-  const { adminOrder } = useSelector((store) => store);
+  const { orders, changedOrder } = useSelector((store) => store.adminOrder);
+  const [fetchedOrder, setFetchedOrder] = useState({});
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getOrders());
   }, []);
 
-  console.log("admin orders", adminOrder);
+  useEffect(() => {
+    dispatch(getOrders());
+  }, [changedOrder]);
+
+  const handleOpen = (id) => {
+    const fetchData = async (id) => {
+      const { data } = await api.get(`/orders/${id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      setFetchedOrder(data);
+    };
+
+    fetchData(id);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setFetchedOrder(null);
+  };
+
   return (
     <div className="px-5 py-5">
       <TableContainer sx={{ bgcolor: "#DAE0E2" }} component={Paper}>
@@ -55,81 +83,90 @@ const OrdersTable = () => {
                 Id
               </StyledTableCell>
               <StyledTableCell sx={{ color: "black" }} align="left">
-                Image
+                Order Detail
               </StyledTableCell>
               <StyledTableCell sx={{ color: "black" }} align="left">
-                Title
+                Created At
               </StyledTableCell>
               <StyledTableCell sx={{ color: "black" }} align="left">
-                Price
+                Selling Price
               </StyledTableCell>
-
               <StyledTableCell sx={{ color: "black" }} align="left">
-                Delete
+                Order State
+              </StyledTableCell>
+              <StyledTableCell sx={{ color: "black" }} align="left">
+                Payment Status
               </StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {adminOrder?.orders?.map((item) => (
-              <StyledTableRow
-                key={item.id}
-                sx={{
-                  "&:last-child td, &:last-child th": { border: 0 },
-                  color: "white",
-                }}>
-                <StyledTableCell
-                  component="th"
-                  scope="row"
-                  sx={{ color: "black" }}>
-                  {item.id}
-                </StyledTableCell>
+            {orders &&
+              orders.orderList?.map((item) => (
+                <StyledTableRow
+                  key={item.id}
+                  sx={{
+                    "&:last-child td, &:last-child th": { border: 0 },
+                    color: "white",
+                  }}>
+                  <StyledTableCell
+                    component="th"
+                    scope="row"
+                    sx={{ color: "black" }}>
+                    {item.id}
+                  </StyledTableCell>
 
-                <StyledTableCell sx={{ color: "black" }} align="left">
-                  <AvatarGroup sx={{ justifyContent: "left" }}>
-                    {item.orderItems.map((orderItem) => (
-                      <Avatar
-                        key={orderItem.imageUrl}
-                        sx={{ border: 0 }}
-                        src={orderItem.product.imageUrl}></Avatar>
-                    ))}
-                  </AvatarGroup>
-                </StyledTableCell>
+                  <StyledTableCell sx={{ color: "black" }} align="left">
+                    <Button
+                      onClick={() => handleOpen(item.id)}
+                      variant="outlined">
+                      order Detail
+                    </Button>
+                  </StyledTableCell>
 
-                <StyledTableCell
-                  scope="row"
-                  sx={{ color: "black" }}
-                  align="left">
-                  {item.orderItems.map((orderItem) => (
-                    <p key={orderItem.imageUrl}>{orderItem.product.title},</p>
-                  ))}
-                </StyledTableCell>
+                  <StyledTableCell sx={{ color: "black" }} align="left">
+                    {new Date(item.createdAt.slice(0, 23) + "Z").toLocaleString(
+                      "zh-TW",
+                      {
+                        timeZone: "Asia/Taipei",
+                      }
+                    )}
+                  </StyledTableCell>
 
-                <StyledTableCell sx={{ color: "black" }} align="left">
-                  $ {item.totalPrice.toLocaleString("en-US")}
-                </StyledTableCell>
+                  <StyledTableCell sx={{ color: "black" }} align="left">
+                    {item.sellingPrice.toLocaleString("zh-TW", {
+                      style: "currency",
+                      currency: "TWD",
+                    })}
+                  </StyledTableCell>
 
-                <StyledTableCell sx={{ color: "black" }} align="left">
-                  <Button
-                    variant="outlined"
-                    onClick={() => handleDeleteProduct(item.id)}
-                    sx={{
-                      bgcolor: "white",
-                      color: "#EC4849",
-                      borderColor: "#EC4849",
-                      "&:hover": {
-                        backgroundColor: "#EC4849",
-                        borderColor: "#EC4849",
-                        color: "white",
-                      },
-                    }}>
-                    Delete
-                  </Button>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
+                  <StyledTableCell sx={{ color: "black" }} align="left">
+                    {item.orderStateRecordList[0].state == "PENDING" ? (
+                      <OrderStateDropdownMenu
+                        state={item.orderStateRecordList[0].state}
+                        orderId={item.id}
+                        paymentStatus={item.payment.status}
+                      />
+                    ) : (
+                      <p>{item.orderStateRecordList[0].state}</p>
+                    )}
+                  </StyledTableCell>
+                  <StyledTableCell sx={{ color: "black" }} align="left">
+                    {item.payment.status}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
+      {fetchedOrder && (
+        <OrderDetailsModal
+          open={open}
+          handleClose={handleClose}
+          fetchedOrder={fetchedOrder}
+          StyledTableCell={StyledTableCell}
+          StyledTableRow={StyledTableRow}
+        />
+      )}
     </div>
   );
 };

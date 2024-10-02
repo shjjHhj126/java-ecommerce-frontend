@@ -52,10 +52,15 @@ export const getOrderById = (orderId) => async (dispatch) => {
   }
 };
 
-export const getOrders = (data) => async (dispatch) => {
+export const getOrders = (dataReq) => async (dispatch) => {
   dispatch({ type: GET_ORDERS_REQ });
+  let url = "/orders/details?";
+  if (dataReq?.orderState != undefined) {
+    url += `?orderState=${dataReq.orderState}`;
+  }
+
   try {
-    const { data } = await api.get("/orders/details", {
+    const { data } = await api.get(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

@@ -22,17 +22,11 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Dashboard from "./pages/Dashboard";
 import ProductsTable from "./pages/ProductsTable";
 import CreateProductForm from "./pages/CreateProductForm";
-import CustomersTable from "./pages/CustomersTable";
 import OrdersTable from "./pages/OrdersTable";
 
 const menu = [
   { name: "Dashboard", icon: <DashboardIcon />, path: "/management" },
   { name: "Products", icon: <Inventory />, path: "/management/products" },
-  {
-    name: "Customers",
-    icon: <EmojiPeopleIcon />,
-    path: "/management/customers",
-  },
   { name: "Orders", icon: <GradingIcon />, path: "/management/orders" },
   {
     name: "AddProducts",
@@ -100,7 +94,6 @@ const Admin = () => {
             <Route path="/" element={<Dashboard />} />
             <Route path="/products" element={<ProductsTable />} />
             <Route path="/products/create" element={<CreateProductForm />} />
-            <Route path="/customers" element={<CustomersTable />} />
             <Route path="/orders" element={<OrdersTable />} />
           </Routes>
         </div>
